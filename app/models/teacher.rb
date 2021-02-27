@@ -1,2 +1,2 @@
-class Teacher < ApplicationRecord
+class Teacher < User
 end

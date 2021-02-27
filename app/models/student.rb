@@ -1,2 +1,2 @@
-class Student < ApplicationRecord
+class Student < User
 end
