@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(version: 2021_03_07_023311) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "deliverables", force: :cascade do |t|
+    t.integer "weight", default: 0
+    t.boolean "proctored", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
