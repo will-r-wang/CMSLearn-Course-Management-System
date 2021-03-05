@@ -1,2 +1,7 @@
 class Course < ApplicationRecord
+    has_many :activity
+    has_and_belongs_to_many :student
+    has_and_belongs_to_many :semester
+
+
 end
