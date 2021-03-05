@@ -17,6 +17,14 @@ ActiveRecord::Schema.define(version: 2021_03_07_023311) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "assignments", force: :cascade do |t|
+    t.datetime "due_date"
+    t.string "submission_type"
+    t.integer "grade"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "course_name"
     t.string "course_code"
@@ -34,6 +42,14 @@ ActiveRecord::Schema.define(version: 2021_03_07_023311) do
 
   create_table "departments", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "quizzes", force: :cascade do |t|
+    t.datetime "time_opened"
+    t.datetime "time_closed"
+    t.time "alloted_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
