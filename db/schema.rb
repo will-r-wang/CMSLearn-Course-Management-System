@@ -17,6 +17,13 @@ ActiveRecord::Schema.define(version: 2021_03_07_023311) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "announcements", force: :cascade do |t|
+    t.text "announcement_content"
+    t.boolean "pinned"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "assignments", force: :cascade do |t|
     t.datetime "due_date"
     t.string "submission_type"
