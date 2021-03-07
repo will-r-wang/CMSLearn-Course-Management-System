@@ -4,6 +4,7 @@ class CreateQuizzes < ActiveRecord::Migration[6.1]
       t.datetime :time_opened
       t.datetime :time_closed
       t.time :alloted_time
+      t.string :type
 
       t.timestamps
     end
