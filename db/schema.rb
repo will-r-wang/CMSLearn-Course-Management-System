@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_07_190630) do
+ActiveRecord::Schema.define(version: 2021_03_07_191148) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -28,6 +28,12 @@ ActiveRecord::Schema.define(version: 2021_03_07_190630) do
     t.datetime "due_date"
     t.string "submission_type"
     t.integer "grade"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "course_add_ons", force: :cascade do |t|
+    t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
