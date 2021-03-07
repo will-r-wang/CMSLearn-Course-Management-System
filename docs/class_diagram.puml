@@ -1,0 +1,91 @@
+@startuml
+abstract class User {
+  username : string,
+  password : string,
+  email : string,
+  first_name : string,
+  last_name : string
+}
+
+class Teacher {
+  teacher_id : string
+}
+
+class Student {
+  student_id : string
+}
+
+class Admin {
+  admin_credentials : string
+}
+
+class Course {
+  course_name : string,
+  course_code : string,
+  capacity : string
+}
+
+class Department {
+  name : string
+}
+
+class Semester {
+  start_date : datetime,
+  end_date : datetime,
+  registration_deadline : datetime
+}
+
+abstract class Activity {
+  name : string
+}
+
+class Resource {
+  type: string
+}
+
+abstract class Deliverable {
+  weight : float
+}
+
+class Tutorial
+class Quiz {
+  time_opened : string,
+  time_closed : string,
+  allotted_time : string,
+  type : string
+}
+
+class Assignment {
+  due_date : datetime,
+  submission_type : string,
+  grade : float
+}
+
+class BackgroundSurvey
+
+class Announcement {
+  text : string,
+  pinned? : boolean
+}
+
+class Registration {
+  status : string
+}
+
+abstract class Notification
+class EmailNotification
+class WebNotification
+
+class Teacher extends User
+class Student extends User
+class Admin extends User
+class Resource extends Activity
+class Deliverable extends Activity
+class Tutorial extends Deliverable
+class Quiz extends Deliverable
+class Assignment extends Deliverable
+class BackgroundSurvey extends Deliverable
+class EmailNotification extends Notification
+class WebNotification extends Notification
+
+@enduml
