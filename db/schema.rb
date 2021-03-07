@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_07_213939) do
+ActiveRecord::Schema.define(version: 2021_03_07_214352) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
@@ -36,6 +36,11 @@ ActiveRecord::Schema.define(version: 2021_03_07_213939) do
     t.datetime "due_date"
     t.string "submission_type"
     t.integer "grade"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "background_surveys", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
