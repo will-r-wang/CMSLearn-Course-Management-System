@@ -10,9 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_27_203714) do
+ActiveRecord::Schema.define(version: 2021_03_07_023311) do
 
   create_table "admins", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "course_name"
+    t.string "course_code"
+    t.integer "capacity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "departments", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "semesters", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.date "registration_deadline"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -20,19 +42,23 @@ ActiveRecord::Schema.define(version: 2021_02_27_203714) do
   create_table "students", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "student_id"
   end
 
   create_table "teachers", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "teacher_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "fname"
-    t.string "lname"
+    t.string "first_name"
+    t.string "last_name"
     t.string "username"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password"
+    t.string "email"
   end
 
 end
