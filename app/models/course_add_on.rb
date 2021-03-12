@@ -1,0 +1,2 @@
+class CourseAddOn < ApplicationRecord
+end

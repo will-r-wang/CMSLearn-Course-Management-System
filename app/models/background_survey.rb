@@ -1,0 +1,2 @@
+class BackgroundSurvey < ApplicationRecord
+end
