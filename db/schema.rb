@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_12_133044) do
+ActiveRecord::Schema.define(version: 2021_03_13_001306) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
@@ -72,6 +72,11 @@ ActiveRecord::Schema.define(version: 2021_03_12_133044) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "email_notifications", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.string "delivery_method"
     t.datetime "created_at", precision: 6, null: false
@@ -123,6 +128,11 @@ ActiveRecord::Schema.define(version: 2021_03_12_133044) do
     t.string "teacher_id"
   end
 
+  create_table "text_notifications", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "tutorials", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -136,6 +146,11 @@ ActiveRecord::Schema.define(version: 2021_03_12_133044) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "password"
     t.string "email"
+  end
+
+  create_table "web_notifications", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "activities", "courses"

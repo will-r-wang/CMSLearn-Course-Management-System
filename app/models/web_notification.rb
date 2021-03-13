@@ -1,0 +1,2 @@
+class WebNotification < ApplicationRecord
+end
