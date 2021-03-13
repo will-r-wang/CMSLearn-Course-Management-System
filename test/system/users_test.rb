@@ -14,8 +14,8 @@ class UsersTest < ApplicationSystemTestCase
     visit users_url
     click_on "New User"
 
-    fill_in "Fname", with: @user.fname
-    fill_in "Lname", with: @user.lname
+    fill_in "First name", with: @user.first_name
+    fill_in "Last Name", with: @user.last_name
     fill_in "Username", with: @user.username
     click_on "Create User"
 
@@ -27,8 +27,8 @@ class UsersTest < ApplicationSystemTestCase
     visit users_url
     click_on "Edit", match: :first
 
-    fill_in "Fname", with: @user.fname
-    fill_in "Lname", with: @user.lname
+    fill_in "First Name", with: @user.first_name
+    fill_in "Last Name", with: @user.last_name
     fill_in "Username", with: @user.username
     click_on "Update User"
 
