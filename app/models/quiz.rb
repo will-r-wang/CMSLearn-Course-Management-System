@@ -1,3 +1,4 @@
 class Quiz < ApplicationRecord
-    belongs_to :deliverable
+    set_table_name "quizzes"
 end
+

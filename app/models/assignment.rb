@@ -1,3 +1,3 @@
 class Assignment < ApplicationRecord
-    belongs_to :deliverable
+    set_table_name "assignments"
 end
