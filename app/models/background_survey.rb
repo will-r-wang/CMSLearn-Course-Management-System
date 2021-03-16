@@ -1,4 +1,4 @@
 class BackgroundSurvey < ApplicationRecord
-    belongs_to :deliverable,
+    belongs_to :deliverable
 end
 
