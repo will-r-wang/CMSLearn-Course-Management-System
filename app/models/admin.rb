@@ -1,3 +1,3 @@
 class Admin < User
-    belongs_to :user
+    set_table_name "admins"
 end

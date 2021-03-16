@@ -1,4 +1,4 @@
 class BackgroundSurvey < ApplicationRecord
-    belongs_to :deliverable
+    set_table_name "background_surveys"
 end
 

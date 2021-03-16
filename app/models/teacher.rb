@@ -1,3 +1,3 @@
 class Teacher < User
-    # belongs_to :user
+    set_table_name "teachers"
 end
