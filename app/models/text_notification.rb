@@ -1,0 +1,2 @@
+class TextNotification < Notification
+end

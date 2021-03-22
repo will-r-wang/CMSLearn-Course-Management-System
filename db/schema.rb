@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_12_133044) do
+ActiveRecord::Schema.define(version: 2021_03_22_154818) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
@@ -45,12 +45,6 @@ ActiveRecord::Schema.define(version: 2021_03_12_133044) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "course_add_ons", force: :cascade do |t|
-    t.string "type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "courses", force: :cascade do |t|
     t.string "course_name"
     t.string "course_code"
@@ -68,6 +62,11 @@ ActiveRecord::Schema.define(version: 2021_03_12_133044) do
 
   create_table "departments", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "email_notifications", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -123,6 +122,11 @@ ActiveRecord::Schema.define(version: 2021_03_12_133044) do
     t.string "teacher_id"
   end
 
+  create_table "text_notifications", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "tutorials", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -136,6 +140,11 @@ ActiveRecord::Schema.define(version: 2021_03_12_133044) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "password"
     t.string "email"
+  end
+
+  create_table "web_notifications", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "activities", "courses"
