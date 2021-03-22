@@ -1,2 +1,2 @@
-class TextNotification < ApplicationRecord
+class TextNotification < Notification
 end

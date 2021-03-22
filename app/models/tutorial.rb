@@ -1,2 +1,2 @@
-class Tutorial < CourseAddOn
+class Tutorial < Deliverable
 end
