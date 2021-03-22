@@ -1,3 +1,2 @@
-class Tutorial < ApplicationRecord
-    belongs_to :deliverable
+class Tutorial < CourseAddOn
 end

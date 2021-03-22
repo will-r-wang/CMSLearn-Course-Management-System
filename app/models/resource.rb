@@ -1,3 +1,3 @@
-class Resource < ApplicationRecord
-    belongs_to :activity
+class Resource < Activity
+    belongs_to: course
 end

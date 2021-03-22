@@ -1,4 +1,4 @@
 class Student < User
-    set_table_name "students"
-    
+   belongs_to: registration
+   has_and_belongs_to_many: course
 end

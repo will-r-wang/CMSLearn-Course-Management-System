@@ -1,3 +1,4 @@
 class Teacher < User
-    set_table_name "teachers"
+    belongs_to: department
+    has_and_belongs_to_many: course
 end
