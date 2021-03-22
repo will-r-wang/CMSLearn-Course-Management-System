@@ -1,3 +1,3 @@
-class Assignment < ApplicationRecord
-    set_table_name "assignments"
+class Assignment < Deliverable
+    belongs_to: course
 end

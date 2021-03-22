@@ -1,4 +1,4 @@
-class Quiz < ApplicationRecord
-    set_table_name "quizzes"
+class Quiz < Deliverable
+    belongs_to: course
 end
 

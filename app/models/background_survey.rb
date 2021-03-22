@@ -1,4 +1,3 @@
-class BackgroundSurvey < ApplicationRecord
-    set_table_name "background_surveys"
+class BackgroundSurvey < Deliverable
 end
 
