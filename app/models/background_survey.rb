@@ -1,2 +1,3 @@
-class BackgroundSurvey < ApplicationRecord
+class BackgroundSurvey < Deliverable
 end
+

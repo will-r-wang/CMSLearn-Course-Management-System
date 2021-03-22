@@ -1,2 +1,2 @@
-class Tutorial < ApplicationRecord
+class Tutorial < CourseAddOn
 end

@@ -1,2 +1,3 @@
-class Assignment < ApplicationRecord
+class Assignment < Deliverable
+    belongs_to: course
 end
