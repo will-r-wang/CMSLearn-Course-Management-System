@@ -1,2 +1,2 @@
-class EmailNotification < ApplicationRecord
+class EmailNotification < Notification
 end
