@@ -1,0 +1,30 @@
+@startuml
+title Observer Pattern
+
+Subject <|.down. AnnouncementManager
+Observer <|.down. Student
+Subject "1" -right-> "*" Observer
+AnnouncementManager <-left- Student: Subject
+interface Subject {
+  registerObserver()
+  removeObserver()
+  notifyObservers()
+}
+
+interface Observer {
+  update()
+}
+
+class AnnouncementManager{
+  registerObserver()
+  removeObserver()
+  notifyObservers()
+  ---
+  getState()
+  setState()
+}
+
+class Student{
+    update()
+}
+@enduml

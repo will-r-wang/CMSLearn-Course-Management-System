@@ -1,0 +1,28 @@
+@startuml
+
+skinparam shadowing false
+skinparam defaultFontColor White
+skinparam arrowFontColor Black
+skinparam interface {
+  BackgroundColor<<var>> Black
+}
+
+top to bottom direction
+
+() "Start" as Start <<var>>
+() "End" as End <<var>>
+
+() 1
+() 2a
+() 2b
+Start --> 1: 1
+1 --> 2a: 2a
+2b <- 1: 2b
+2b ---> End
+2a --> End: 3
+
+' () 1
+' Start --> 1: 1
+' 1 --> End: 2
+
+@enduml
