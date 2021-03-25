@@ -1,0 +1,26 @@
+@startuml
+participant Teacher
+participant AnnouncementManager
+participant Student1
+participant Student2
+participant Student3
+
+AnnouncementManager<-Student1:subscribe
+AnnouncementManager<-Student2:subscribe
+Teacher->AnnouncementManager:create announcement
+AnnouncementManager->AnnouncementManager:notify
+AnnouncementManager->Student1:update
+AnnouncementManager->Student2:update
+AnnouncementManager<-Student1:unsubscribe
+AnnouncementManager<-Student3:subscribe
+Teacher->AnnouncementManager:create announcement
+AnnouncementManager->AnnouncementManager:notify
+AnnouncementManager->Student2:update
+AnnouncementManager->Student3:update
+
+'Bob->Charlie:m2
+'note over Alice, Charlie: Old method for note over all part. with:\n ""note over //FirstPart, LastPart//"".
+'note across: New method with:\n""note across""
+'Bob->Alice
+'hnote across:Note across all part.
+@enduml

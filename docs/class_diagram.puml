@@ -75,6 +75,7 @@ class Registration {
 abstract class Notification
 class EmailNotification
 class WebNotification
+class TextNotification
 
 class Teacher extends User
 class Student extends User
@@ -87,5 +88,6 @@ class Assignment extends Deliverable
 class BackgroundSurvey extends Deliverable
 class EmailNotification extends Notification
 class WebNotification extends Notification
+class TextNotification extends Notification
 
 @enduml
