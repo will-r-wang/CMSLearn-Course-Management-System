@@ -1,0 +1,19 @@
+@startuml
+package notification.package {
+  abstract class Notification
+  class EmailNotification
+  class WebNotification
+  class TextNotification
+
+  class EmailNotification implements Notification
+  class WebNotification implements Notification
+  class TextNotification implements Notification
+}
+
+class NotificationFactory {
+  create_notification (notification_type)
+}
+
+NotificationFactory ..> Notification
+
+@enduml

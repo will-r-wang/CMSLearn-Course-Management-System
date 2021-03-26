@@ -1,0 +1,34 @@
+@startuml
+package user.package {
+  abstract class User {
+    username : string,
+    password : string,
+    email : string,
+    first_name : string,
+    last_name : string
+  }
+
+  class Teacher {
+    teacher_id : string
+  }
+
+  class Student {
+    student_id : string
+  }
+
+  class Admin {
+    admin_credentials : string
+  }
+
+  class Teacher implements User
+  class Student implements User
+  class Admin implements User
+}
+
+class UserFactory {
+  create_user (user_type)
+}
+
+UserFactory ..> User
+
+@enduml
