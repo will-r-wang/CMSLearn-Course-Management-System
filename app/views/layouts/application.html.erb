@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>COMP3004Cms</title>
+    <title>CMSLearn</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,10 @@
   </head>
 
   <body>
+    <% if flash[:error] %>
+      <p  style="color:red;"><%= flash[:error] %></p>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
