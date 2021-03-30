@@ -1,0 +1,46 @@
+@startuml
+title Visitor Pattern Class Diagram
+
+class Client << (S, orchid) >>
+Client --> Visitor
+Client --> Visitable
+
+Visitor <|.down. CommentsVisitor
+Visitor <|.down. GradesVisitor
+Visitor <|.down. FinalGradesVisitor
+
+Visitable <|.down. Submission
+Visitable <|.down. Student
+
+interface Visitor {
+  visit()
+}
+
+interface Visitable {
+  accept(a_visitor)
+}
+
+class CommentsVisitor {
+  visit_submission()
+}
+
+class GradesVisitor {
+  visit_submission()
+}
+
+class FinalGradesVisitor {
+  visit_student()
+}
+
+class Submission {
+  accept(a_visitor)
+  update_grade()
+  update_comment()
+}
+
+class Student {
+  accept(a_visitor)
+  update_final_grade()
+}
+@enduml
+
