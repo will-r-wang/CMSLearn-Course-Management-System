@@ -1,0 +1,21 @@
+@startuml
+participant VisitableInterface
+participant Submission
+participant GradesVisitor
+participant CommentsVisitor
+participant Student
+participant FinalGradesVisitor
+
+== Updating Submission ==
+VisitableInterface->Submission:accept(a_visitor)
+Submission->GradesVisitor:visit_submission()
+GradesVisitor->Submission:update_grade()
+Submission->CommentsVisitor:visit_submission()
+CommentsVisitor->Submission:update_comment()
+
+== Updating Final Grade ==
+VisitableInterface->Student:accept(a_visitor)
+Student->FinalGradesVisitor:visit_student()
+FinalGradesVisitor->Student:update_final_grade()
+@enduml
+
