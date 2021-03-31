@@ -1,19 +1,22 @@
 <% if logged_in? %>
   <h1>CMSLearn Dashboard</h1>
   <h3>Welcome <%= current_user.username %></h3>
-  <%= button_to "Logout", '/logout', method: :get%>
 <% else %>
   <h1>Login to CMSLearn</h1>
 
   <%= form_with url: "/login", method: :post do |form| %>
-    <%= form.label :username, "Username:" %>
-    <%= form.text_field :username %>
+    <div class="form-group">
+      <%= form.label :username, "Username:" %>
+      <%= form.text_field :username %>
+    </div>
 
-    <%= form.label :password, "Password:" %>
-    <%= form.password_field :password %>
+    <div class="form-group">
+      <%= form.label :password, "Password:" %>
+      <%= form.password_field :password %>
+    </div>
 
-    <br><br><%= form.submit "Login" %>
+    <%= form.submit "Login", class: "btn btn-default btn-primary" %>
   <% end %>
 
-  <br><%= button_to "Don't have an account yet? Sign up here.", '/users/new', method: :get%>
+  <br><p>Don't have an account yet? Sign up <%= link_to "here.", '/users/new', {:style=> 'color: #0d6efd; text-decoration: underline;'} %></p>
 <% end %>
