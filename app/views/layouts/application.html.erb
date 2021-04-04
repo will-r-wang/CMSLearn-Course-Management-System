@@ -19,7 +19,14 @@
     <br>
     <section class="container">
       <% if flash[:error] %>
-        <p  style="color:red;"><%= flash[:error] %></p>
+        <div class="alert alert-danger" role="alert">
+          <%= flash[:error] %>
+        </div>
+      <% end %>
+      <% if flash[:notice] %>
+        <div class="alert alert-primary" role="alert">
+          <%= flash[:notice] %>
+        </div>
       <% end %>
       <%= yield %>
     </section>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_29_064150) do
+ActiveRecord::Schema.define(version: 2021_04_04_094059) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
@@ -48,6 +48,16 @@ ActiveRecord::Schema.define(version: 2021_03_29_064150) do
   create_table "background_surveys", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "course_registrations", force: :cascade do |t|
+    t.string "status"
+    t.integer "student_id", null: false
+    t.integer "course_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_course_registrations_on_course_id"
+    t.index ["student_id"], name: "index_course_registrations_on_student_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -93,16 +103,6 @@ ActiveRecord::Schema.define(version: 2021_03_29_064150) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "registrations", force: :cascade do |t|
-    t.string "status"
-    t.integer "student_id", null: false
-    t.integer "course_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_id"], name: "index_registrations_on_course_id"
-    t.index ["student_id"], name: "index_registrations_on_student_id"
-  end
-
   create_table "resources", force: :cascade do |t|
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
@@ -146,6 +146,15 @@ ActiveRecord::Schema.define(version: 2021_03_29_064150) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "user_registrations", force: :cascade do |t|
+    t.string "status"
+    t.string "user_type"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_registrations_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -154,6 +163,7 @@ ActiveRecord::Schema.define(version: 2021_03_29_064150) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
     t.string "email"
+    t.string "type"
   end
 
   create_table "web_notifications", force: :cascade do |t|
@@ -162,6 +172,7 @@ ActiveRecord::Schema.define(version: 2021_03_29_064150) do
   end
 
   add_foreign_key "activities", "courses"
-  add_foreign_key "registrations", "courses"
-  add_foreign_key "registrations", "students"
+  add_foreign_key "course_registrations", "courses"
+  add_foreign_key "course_registrations", "students"
+  add_foreign_key "user_registrations", "users"
 end
