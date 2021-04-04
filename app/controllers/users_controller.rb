@@ -11,11 +11,19 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params.except(:type))
+    @user = User.new(user_params.except(:user_type))
 
     if @user.save
-      flash[:notice] = "User successfully created"
-      redirect_to '/login'
+      begin
+        create_user_registration
+      rescue
+        flash[:error] = "Error creating user registration"
+        @user.destroy
+        redirect_to new_user_path
+      else
+        flash[:notice] = "User successfully registered. Expect the status of registration to be updated in a few days."
+        redirect_to '/login'
+      end
     else
       flash[:error] = @user.errors
       redirect_to new_user_path
@@ -48,6 +56,10 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :username, :password, :type)
+    params.require(:user).permit(:first_name, :last_name, :email, :username, :password, :user_type)
+  end
+
+  def create_user_registration
+    UserRegistration.create!(status: "pending", user_type: user_params[:user_type], user: @user)
   end
 end

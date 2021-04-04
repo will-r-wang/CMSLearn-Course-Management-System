@@ -1,22 +1,17 @@
-<% if logged_in? %>
-  <h1>CMSLearn Dashboard</h1>
-  <h3>Welcome <%= current_user.username %></h3>
-<% else %>
-  <h1>Login to CMSLearn</h1>
+<h1>Login to CMSLearn</h1>
 
-  <%= form_with url: "/login", method: :post do |form| %>
-    <div class="form-group">
-      <%= form.label :username, "Username:" %>
-      <%= form.text_field :username, class: "form-control" %>
-    </div>
+<%= form_with url: "/login", method: :post do |form| %>
+  <div class="form-group">
+    <%= form.label :username, "Username:" %>
+    <%= form.text_field :username, class: "form-control" %>
+  </div>
 
-    <div class="form-group">
-      <%= form.label :password, "Password:" %>
-      <%= form.password_field :password, class: "form-control" %>
-    </div>
+  <div class="form-group">
+    <%= form.label :password, "Password:" %>
+    <%= form.password_field :password, class: "form-control" %>
+  </div>
 
-    <br><%= form.submit "Login", class: "btn btn-primary btn-lg btn-block" %>
-  <% end %>
-
-  <br><br><p>Don't have an account yet? Sign up <%= link_to "here.", '/users/new', {:style=> 'color: #0d6efd; text-decoration: underline;'} %></p>
+  <br><%= form.submit "Login", class: "btn btn-primary btn-lg btn-block" %>
 <% end %>
+
+<br><br><p>Don't have an account yet? Sign up <%= link_to "here.", '/users/new', {:style=> 'color: #0d6efd; text-decoration: underline;'} %></p>
