@@ -68,7 +68,7 @@ class Announcement {
   pinned? : boolean
 }
 
-class Registration {
+class CourseRegistration {
   status : string
 }
 
