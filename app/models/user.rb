@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  belongs_to :registration, optional: true
+  belongs_to :user_registration, optional: true
   has_secure_password
 
   def full_name
