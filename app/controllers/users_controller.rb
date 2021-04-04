@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params.except(:type))
 
     if @user.save
-      session[:user_id] = @user.id
+      flash[:notice] = "User successfully created"
       redirect_to '/login'
     else
       flash[:error] = @user.errors

@@ -23,6 +23,11 @@
           <%= flash[:error] %>
         </div>
       <% end %>
+      <% if flash[:notice] %>
+        <div class="alert alert-primary" role="alert">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
       <%= yield %>
     </section>
   </body>
