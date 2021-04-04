@@ -19,7 +19,9 @@
     <br>
     <section class="container">
       <% if flash[:error] %>
-        <p  style="color:red;"><%= flash[:error] %></p>
+        <div class="alert alert-danger" role="alert">
+          <%= flash[:error] %>
+        </div>
       <% end %>
       <%= yield %>
     </section>
