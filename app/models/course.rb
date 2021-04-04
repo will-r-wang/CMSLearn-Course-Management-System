@@ -1,7 +1,8 @@
 class Course < ApplicationRecord
-    has_many :activity
-    has_and_belongs_to_many :student
-    has_and_belongs_to_many :semester
-    has_many :announcement
-    has_and_belongs_to_many :teacher
+  belongs_to :semester
+  belongs_to :teacher
+  has_many :activity
+  has_many :student_courses
+  has_many :students, through: student_courses
+  has_many :announcement
 end
