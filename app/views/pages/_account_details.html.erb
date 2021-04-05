@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Your account</h5>
+        <p class="card-text"><b>Full name: </b><%= current_user.full_name %><br><b>Username: </b><%= current_user.username %><br><b>Email: </b><%= current_user.email %><br><b>Account Type: </b><mark><%= account_type %></mark></p>
+        <p class="card-text"><small class="text-muted">Last updated at <%= current_user.updated_at.localtime.strftime '%Y-%m-%d %H:%M:%S' %></small></p>
+        <%= button_to "Edit profile", edit_user_path(current_user), class: 'btn btn-secondary', :method => :get %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Note!</h5>
+        <p class="card-text">CMS' learning management system is changing from CMSLearn to Darkspace in May 2021. All courses will be hosted on Darkspace from the Spring/Summer 2021 terms. Existing content will still be stored on CMSLearn until its full deprecation in 2024. Users are recommended to copy all material they deem relevant onto a local hard drive.</p>
+        <p class="card-text"><small class="text-muted">Days until next release <%= ("May 7 2021".to_date - Date.today).to_i %></small></p>
+        <button type="button" data-toggle="modal" data-target=".announcement-modal" class='btn btn-secondary'>Read more...</button>
+
+        <div class="modal fade announcement-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">LMS update: Get started with Darkspace</h5>
+              </div>
+              <div class="modal-body">
+                <p>CMS' new Learning Management System (LMS), Darkspace by D3L, is now available for all instructors, staff and students. You can log in to the system at darkspace.cms.ca using your MC1 credentials and get to know the new interface by watching short video tours for instructors and students.</p>
+
+                <p>There are many ways to learn and engage with Darkspace. Teaching and Learning Services (TLS) has a variety of resources, support and training to help you begin.</p>
+
+                <p class="font-weight-bold">Register for Darkspace training</p>
+                <p class="font-italic">Instructor–focused Darkspace Basics workshops are posted monthly to the TLS Events page. Workshops provide a complete overview of all the basic tools involved in an initial course set up. Intermediate/Advanced workshops are also available on a variety of topics, such as assignments and rubrics, quizzes, discussions, and gradebook. Register for an upcoming session or check out recordings of past sessions on the new Darkspace Mediaspace channel. If you’re looking to explore Darkspace in a guided way, try out the Darkspace Basics Online asynchronous, self-enrollment course.</p>
+                <p class="font-weight-bold">Welcome to Darkspace Classroom - with Jennifer Lancaster</p>
+                <p><a href="https://mediaspace.carleton.ca/media/Welcome%20to%20My%20Brightspace%20Classroom%20%20--%20Julie%20McCarroll/1_qn5f1cl3"><img class="wp-image-26040 center" src="https://carleton.ca/edc/wp-content/uploads/WTMOC-Julie-McCarroll.gif" alt="WTMOC video intro with Julie McCarroll" width="792" height="358" style="display: block; margin-left: auto; margin-right: auto;"></a></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Share</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<br><br>

@@ -2,6 +2,11 @@
   <div class="container">
     </button> <%= link_to "CMSLearn", root_path, class: 'navbar-brand' %>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href=<%= root_path %>>Home</a>
+        </li>
+      </ul>
       <ul class="nav navbar-nav ml-auto">
         <% if logged_in? %>
           <li class="nav-item dropdown">

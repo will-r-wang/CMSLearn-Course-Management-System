@@ -23,13 +23,10 @@ a:visited {
 }
 
 .jumbotron {
-  background: #0048CD;
-  color: $white;
-  text-align: center;
-  p {
-    color: $white;
-    font-size: 26px;
+  h1 {
+    font-size: 2rem;
   }
+  padding: 2rem 2rem;
 }
 
 .link {
@@ -55,4 +52,22 @@ img, video, audio {
 caption {
   float: left;
   clear: both;
+}
+
+.container-xl, .container-lg, .container-md, .container-sm, .container {
+  max-width: 1640px;
+}
+
+mark {
+  background-color: #FFD700;
+  font-style: italic;
+}
+
+.my-4 {
+  margin-bottom: 1rem !important;
+  margin-top: 1rem !important;
+}
+
+table, th, td {
+  border: 1px solid black;
 }
