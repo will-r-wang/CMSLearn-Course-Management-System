@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Search for course</h5>
+    <%= form_tag(pages_home_path, method: :get) do %>
+      <%= text_field_tag(:filter, params[:filter], placeholder: "Search by course_name or course_code", class: "form-control") %>
+      <%= submit_tag("Search Courses", :class => 'btn btn-secondary', :style => "display:inline-block; margin-top:15px;") %>
+    <% end %>
+    <hr class="my-4">
+    <h5>Results</h5>
+    <p>By default displays all courses.</p>
+    <% unless @course_results.empty? %>
+      <table class="table table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Course Name</th>
+            <th scope="col">Teacher</th>
+            <th scope="col">Course Code</th>
+            <th scope="col">Semester</th>
+            <th scope="col">Capacity</th>
+            <th scope="col">Enrolled</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @course_results.each do |course| %>
+            <tr>
+              <th scope="row"><%= course.course_name %></th>
+              <td><%= course.teacher.full_name %></td>
+              <td><%= course.course_code %></td>
+              <td><%= course.semester.name %></td>
+              <td><%= course.capacity %></td>
+              <td><%= course.enrolled_students %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No courses with course_name or course_code = <%= params[:filter] %></p>
+    <% end %>
+  </div>
+</div>
+<br><br>
+
