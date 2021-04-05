@@ -2,14 +2,17 @@ class PagesController < ApplicationController
   skip_before_action :authorized
 
   def home
-    unless logged_in?
-      redirect_to '/login'
-    end
+    redirect_to '/login' unless logged_in?
 
-    if admin?
-      @user_registrations = UserRegistration.where(status: "pending")
+    @user_registrations = UserRegistration.where(status: "pending") if admin?
+    @courses_teaching = Course.where(teacher_id: current_user.id) if teacher?
+    @user_registration = UserRegistration.find_by(user_id: current_user.id) if pending_registration?
+
+    @course_results = if params[:filter].present?
+      params[:filter].strip!
+      Course.where("course_name = ? OR course_code = ?", params[:filter], params[:filter])
     else
-      @user_registration = UserRegistration.find_by(user_id: current_user&.id)
+      Course.all
     end
   end
 end

@@ -1,3 +1,4 @@
 class Student < User
-   has_and_belongs_to_many :course
+  has_many :student_courses
+  has_many :courses, through: :student_courses
 end

@@ -4,7 +4,11 @@ Rails.application.routes.draw do
     post 'deny', on: :member
   end
 
+  resources :courses
   resources :users
+  resources :teachers, controller: 'users', type: 'Teacher'
+  resources :admins, controller: 'users', type: 'Admin'
+  resources :students, controller: 'users', type: 'Student'
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'

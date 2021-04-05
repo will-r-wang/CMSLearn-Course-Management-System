@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
   before_action :authorized
   helper_method :current_user
+  helper_method :current_semester
   helper_method :account_type
+  helper_method :pending_registration?
   helper_method :logged_in?
   helper_method :admin?
   helper_method :student?
@@ -12,8 +14,16 @@ class ApplicationController < ActionController::Base
     User.find_by(id: session[:user_id])
   end
 
+  def current_semester
+    Semester.where("start_date <= ?", Time.now).where("end_date >= ?", Time.now).first
+  end
+
   def account_type
     admin? ? "Admin" : (student? ? "Student" : (teacher? ? "Teacher" : "User"))
+  end
+
+  def pending_registration?
+    logged_in? && !UserRegistration.where(user_id: current_user.id, status: "pending").empty?
   end
 
   def logged_in?

@@ -1,10 +1,12 @@
-<h1>CMSLearn Dashboard</h1>
-<h3>Welcome <%= current_user.full_name %></h3>
+<%= render 'jumbotron' %>
+<%= render 'account_details' %>
 
-<%= render 'profile' %>
-
-<% if admin? %>
-  <%= render 'admin_user_registrations' %>
-<% else %>
+<% if pending_registration? %>
   <%= render 'user_registrations' %>
+<% elsif admin? %>
+  <%= render 'admin_user_registrations' %>
+<% elsif teacher? %>
+  <%= render 'teacher_course_portal' %>
 <% end %>
+
+<%= render 'course_search' %>

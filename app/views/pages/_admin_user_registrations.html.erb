@@ -19,7 +19,7 @@
             <td><%= user_registration.user_id %></td>
             <td><%= user_registration.user_type %></td>
             <td><%= user_registration.status %></td>
-            <td><%= button_to "Approve", approve_user_registration_path(user_registration), :method => :post, form: {style: 'display:inline-block;'} %> | <%= button_to "Deny", deny_user_registration_path(user_registration), :method => :post, form: {style: 'display:inline-block;'} %> </td>
+            <td><%= button_to "Approve", approve_user_registration_path(user_registration), :method => :post, class: 'btn btn-primary', form: {style: 'display:inline-block;'} %> | <%= button_to "Deny", deny_user_registration_path(user_registration), :method => :post, class: 'btn btn-primary', form: {style: 'display:inline-block;'} %> </td>
           </tr>
         <% end %>
       </tbody>
@@ -27,3 +27,4 @@
     <p class="card-text"><small class="text-muted">Last refreshed at <%= DateTime.now.strftime '%Y-%m-%d %H:%M:%S' %></small></p>
   </div>
 </div>
+<br><br>
