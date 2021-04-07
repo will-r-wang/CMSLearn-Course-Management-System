@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_07_084407) do
+ActiveRecord::Schema.define(version: 2021_04_07_120337) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
@@ -35,17 +35,13 @@ ActiveRecord::Schema.define(version: 2021_04_07_084407) do
     t.boolean "pinned"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "announcement_manager_id"
+    t.index ["announcement_manager_id"], name: "index_announcements_on_announcement_manager_id"
   end
 
   create_table "assignments", force: :cascade do |t|
     t.datetime "due_date"
     t.string "submission_type"
-    t.integer "grade"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "background_surveys", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -68,6 +64,8 @@ ActiveRecord::Schema.define(version: 2021_04_07_084407) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "semester_id"
     t.integer "teacher_id"
+    t.integer "department_id"
+    t.index ["department_id"], name: "index_courses_on_department_id"
     t.index ["semester_id"], name: "index_courses_on_semester_id"
     t.index ["teacher_id"], name: "index_courses_on_teacher_id"
   end
@@ -85,17 +83,22 @@ ActiveRecord::Schema.define(version: 2021_04_07_084407) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "documents", force: :cascade do |t|
+  end
+
   create_table "email_notifications", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.string "delivery_method"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "student_id"
     t.integer "course_id"
+    t.integer "user_id"
+    t.string "message"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "quizzes", force: :cascade do |t|
@@ -111,6 +114,7 @@ ActiveRecord::Schema.define(version: 2021_04_07_084407) do
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "hyperlink"
   end
 
   create_table "semesters", force: :cascade do |t|
@@ -123,19 +127,9 @@ ActiveRecord::Schema.define(version: 2021_04_07_084407) do
     t.index ["name"], name: "index_semesters_on_name"
   end
 
-  create_table "student_courses", force: :cascade do |t|
-    t.integer "student_id", null: false
-    t.integer "course_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_id"], name: "index_student_courses_on_course_id"
-    t.index ["student_id"], name: "index_student_courses_on_student_id"
-  end
-
   create_table "students", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "student_id"
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -148,7 +142,6 @@ ActiveRecord::Schema.define(version: 2021_04_07_084407) do
   create_table "teachers", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "teacher_id"
   end
 
   create_table "text_notifications", force: :cascade do |t|
@@ -159,6 +152,9 @@ ActiveRecord::Schema.define(version: 2021_04_07_084407) do
   create_table "tutorials", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "urls", force: :cascade do |t|
   end
 
   create_table "user_registrations", force: :cascade do |t|
@@ -181,6 +177,9 @@ ActiveRecord::Schema.define(version: 2021_04_07_084407) do
     t.string "type"
   end
 
+  create_table "videos", force: :cascade do |t|
+  end
+
   create_table "web_notifications", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -188,7 +187,5 @@ ActiveRecord::Schema.define(version: 2021_04_07_084407) do
 
   add_foreign_key "activities", "courses"
   add_foreign_key "course_registrations", "courses"
-  add_foreign_key "student_courses", "courses"
-  add_foreign_key "student_courses", "students"
   add_foreign_key "user_registrations", "users"
 end
