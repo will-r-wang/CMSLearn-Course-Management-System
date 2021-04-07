@@ -22,14 +22,10 @@ begin
   Semester.create!(name: "Summer 2021", start_date: "May 13 2021".to_date, end_date: "August 16 2021".to_date, registration_deadline: "May 20 2021".to_date)
   Semester.create!(name: "Fall 2021", start_date: "Septermber 8 2021".to_date, end_date: "December 10 2021".to_date, registration_deadline: "September 22, 2021".to_date)
   Semester.create!(name: "Winter 2022", start_date: "January 10 2022".to_date, end_date: "April 12 2022".to_date, registration_deadline: "January 24, 2022".to_date)
-rescue ActiveRecord::RecordInvalid
-  puts "Validation failed: name has already been taken"
-end
 
-begin
-  Course.create!(course_name: "Introduction to Computer Science", course_code: "COMP1405", semester: current_semester)
-  Course.create!(course_name: "Introduction to Computer Science II", course_code: "COMP1406", semester: current_semester)
-  Course.create!(course_name: "Object Oriented Programming", course_code: "COMP3004", semester: current_semester)
+  Course.create!(course_name: "Introduction to Computer Science", course_code: "COMP1405", capacity: 1500, semester: current_semester, teacher: Teacher.last)
+  Course.create!(course_name: "Introduction to Computer Science II", course_code: "COMP1406", capacity: 1200, semester: current_semester, teacher: Teacher.last)
+  Course.create!(course_name: "Object Oriented Programming", course_code: "COMP3004", capacity: 500, semester: current_semester, teacher: Teacher.last)
 rescue ActiveRecord::RecordInvalid
   puts "Validation failed: name has already been taken"
 end
