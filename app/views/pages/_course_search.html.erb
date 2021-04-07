@@ -18,6 +18,9 @@
             <th scope="col">Semester</th>
             <th scope="col">Capacity</th>
             <th scope="col">Enrolled</th>
+            <% if student? %>
+              <th scope="col">Actions</th>
+            <% end %>
           </tr>
         </thead>
         <tbody>
@@ -29,6 +32,15 @@
               <td><%= course.semester.name %></td>
               <td><%= course.capacity %></td>
               <td><%= course.enrolled_students %></td>
+              <% if student? %>
+                <% if pending_course_registration? %>
+                  <td>Pending registration</td>
+                <% elsif registered? %>
+                  <td><%= button_to "Withdraw", withdraw_course_path(course), :method => :post, class: 'btn btn-danger', form: {style: 'display:inline-block;'} %></td>
+                <% else %>
+                  <td><%= button_to "Register", register_course_path(course), :method => :post, class: 'btn btn-primary', form: {style: 'display:inline-block;'} %></td>
+                <% end %>
+              <% end %>
             </tr>
           <% end %>
         </tbody>

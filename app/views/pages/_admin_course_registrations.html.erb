@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Pending Course Registration Requests</h5>
+    <p class="card-text">Showing all pending Course Registration Requests with User Id, Course Id, and Status</p>
+    <table class="table table-sm">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">User Id</th>
+          <th scope="col">User Full Name</th>
+          <th scope="col">Course Id</th>
+          <th scope="col">Course Code</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @course_registrations.each do |course_registration| %>
+          <tr>
+            <th scope="row"><%= course_registration.id %></th>
+            <td><%= course_registration.user_id %></td>
+            <td><%= course_registration.user.full_name %></td>
+            <td><%= course_registration.course_id %></td>
+            <td><%= course_registration.course.course_code %></td>
+            <td><%= course_registration.status %></td>
+            <td><%= button_to "Approve", approve_course_registration_path(course_registration), :method => :post, class: 'btn btn-primary', form: {style: 'display:inline-block;'} %> | <%= button_to "Deny", deny_course_registration_path(course_registration), :method => :post, class: 'btn btn-primary', form: {style: 'display:inline-block;'} %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <p class="card-text"><small class="text-muted">Last refreshed at <%= DateTime.now.strftime '%Y-%m-%d %H:%M:%S' %></small></p>
+  </div>
+</div>
+<br><br>

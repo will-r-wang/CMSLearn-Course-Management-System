@@ -21,7 +21,7 @@ class UsersController < ApplicationController
         @user.destroy
         redirect_to new_user_path
       else
-        flash[:notice] = "#{klass.name} successfully registered. Expect the status of registration to be updated in a few days."
+        flash[:notice] = "#{klass.name} successfully registered. An admin will review your request shortly."
         redirect_to '/login'
       end
     else

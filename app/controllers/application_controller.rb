@@ -3,7 +3,9 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_semester
   helper_method :account_type
-  helper_method :pending_registration?
+  helper_method :pending_user_registration?
+  helper_method :pending_course_registration?
+  helper_method :registered?
   helper_method :logged_in?
   helper_method :admin?
   helper_method :student?
@@ -22,8 +24,16 @@ class ApplicationController < ActionController::Base
     admin? ? "Admin" : (student? ? "Student" : (teacher? ? "Teacher" : "User"))
   end
 
-  def pending_registration?
+  def pending_user_registration?
     logged_in? && !UserRegistration.where(user_id: current_user.id, status: "pending").empty?
+  end
+
+  def pending_course_registration?
+    logged_in? && !CourseRegistration.where(user_id: current_user.id, status: "pending").empty?
+  end
+
+  def registered?
+    logged_in? && !CourseRegistration.where(user_id: current_user.id, status: "approved").empty?
   end
 
   def logged_in?
