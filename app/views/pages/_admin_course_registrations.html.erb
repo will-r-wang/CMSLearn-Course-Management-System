@@ -20,9 +20,9 @@
             <th scope="row"><%= course_registration.id %></th>
             <td><%= course_registration.user_id %></td>
             <td><%= course_registration.user.full_name %></td>
-            <td><%= user_registration.course_id %></td>
-            <td><%= user_registration.course.course_code %></td>
-            <td><%= user_registration.status %></td>
+            <td><%= course_registration.course_id %></td>
+            <td><%= course_registration.course.course_code %></td>
+            <td><%= course_registration.status %></td>
             <td><%= button_to "Approve", approve_course_registration_path(course_registration), :method => :post, class: 'btn btn-primary', form: {style: 'display:inline-block;'} %> | <%= button_to "Deny", deny_course_registration_path(course_registration), :method => :post, class: 'btn btn-primary', form: {style: 'display:inline-block;'} %> </td>
           </tr>
         <% end %>

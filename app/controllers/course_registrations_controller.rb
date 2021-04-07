@@ -8,9 +8,9 @@ class CourseRegistrationsController < ApplicationController
 
     raise "Invalid user_type" unless user.kind_of?(Student)
 
-    transaction do
+    ActiveRecord::Base.transaction do
       course_registration.update!(status: "approved")
-      flash[:notice] = "Approved #{user.full_name}'s request to register in course #{course.name}"
+      flash[:notice] = "Approved #{user.full_name}'s request to register in course #{course.course_name}"
     end
 
     redirect_to root_path
@@ -23,9 +23,9 @@ class CourseRegistrationsController < ApplicationController
 
     raise "Invalid user_type" unless user.kind_of?(Student)
 
-    transaction do
+    ActiveRecord::Base.transaction do
       course_registration.update!(status: "denied")
-      flash[:notice] = "Denied #{user.full_name}'s request to register in course #{course.name}"
+      flash[:notice] = "Denied #{user.full_name}'s request to register in course #{course.course_name}"
     end
 
     redirect_to root_path

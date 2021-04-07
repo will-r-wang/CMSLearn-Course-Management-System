@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   skip_before_action :authorized
-  before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[ show edit update destroy register withdraw ]
 
   def new
     @course = Course.new
@@ -20,8 +20,28 @@ class CoursesController < ApplicationController
     end
   end
 
-  def edit
+  def register
+    create_course_registration
+  rescue
+    flash[:error] = "Error creating course registration"
+    redirect_to root_path
+  else
+    flash[:notice] = "Course #{@course.course_code} successfully registered. An admin will review your request shortly."
+    redirect_to root_path
+  end
 
+  def withdraw
+    course_registration = CourseRegistration.find_by!(status: "approved", user: current_user, course: @course)
+
+    binding.pry
+    if course_registration
+      course_registration.update!(status: "withdrawn")
+      flash[:notice] = "Course #{@course.course_code} successfully withdrawn."
+      redirect_to root_path
+    end
+  end
+
+  def edit
   end
 
   def update
@@ -40,5 +60,9 @@ class CoursesController < ApplicationController
 
   def course_params
     params.require(:course).permit(:course_name, :course_code, :capacity)
+  end
+
+  def create_course_registration
+    CourseRegistration.create!(status: "pending", user: current_user, course: @course)
   end
 end

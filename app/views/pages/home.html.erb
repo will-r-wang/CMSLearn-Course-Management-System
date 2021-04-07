@@ -1,7 +1,7 @@
 <%= render 'jumbotron' %>
 <%= render 'account_details' %>
 
-<% if pending_registration? %>
+<% if pending_user_registration? %>
   <%= render 'user_registrations' %>
 <% elsif admin? %>
   <%= render 'admin_user_registrations' %>

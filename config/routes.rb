@@ -1,16 +1,20 @@
 Rails.application.routes.draw do
 
-  resources :course_registrations, only: [:show] do
+  resources :course_registrations do
     post 'approve', on: :member
     post 'deny', on: :member
   end
 
-  resources :user_registrations, only: [:show] do
+  resources :user_registrations do
     post 'approve', on: :member
     post 'deny', on: :member
   end
 
-  resources :courses
+  resources :courses do
+    post 'register', on: :member
+    post 'withdraw', on: :member
+  end
+
   resources :users
   resources :teachers, controller: 'users', type: 'Teacher'
   resources :admins, controller: 'users', type: 'Admin'
