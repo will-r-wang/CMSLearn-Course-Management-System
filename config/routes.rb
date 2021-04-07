@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+
+  resources :course_registrations, only: [:show] do
+    post 'approve', on: :member
+    post 'deny', on: :member
+  end
+
   resources :user_registrations, only: [:show] do
     post 'approve', on: :member
     post 'deny', on: :member

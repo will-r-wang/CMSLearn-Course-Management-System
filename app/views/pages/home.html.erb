@@ -5,6 +5,7 @@
   <%= render 'user_registrations' %>
 <% elsif admin? %>
   <%= render 'admin_user_registrations' %>
+  <%= render 'admin_course_registrations' %>
 <% elsif teacher? %>
   <%= render 'teacher_course_portal' %>
 <% end %>
