@@ -1,28 +1,24 @@
 @startuml
-abstract class User {
+class User {
   username : string,
   password : string,
   email : string,
   first_name : string,
   last_name : string
+  type : type,
 }
 
-class Teacher {
-  teacher_id : string
-}
-
-class Student {
-  student_id : string
-}
-
-class Admin {
-  admin_credentials : string
-}
+class Teacher
+class Student
+class Admin
 
 class Course {
   course_name : string,
   course_code : string,
-  capacity : string
+  capacity : string,
+  semester_id : ID,
+  teacher_id : ID,
+  department_id : ID,
 }
 
 class Department {
@@ -30,21 +26,29 @@ class Department {
 }
 
 class Semester {
+  name : string,
   start_date : datetime,
   end_date : datetime,
   registration_deadline : datetime
 }
 
-abstract class Activity {
-  name : string
+abstract Activity {
+  name : string,
+  course_id : ID
 }
 
-class Resource {
+class AnnouncementManager {
+  course_id : ID
+}
+
+abstract Resource {
   type: string
 }
 
-abstract class Deliverable {
-  weight : float
+abstract Deliverable {
+  weight : float,
+  proctored? : boolean
+  type : string
 }
 
 class Tutorial
@@ -58,36 +62,61 @@ class Quiz {
 class Assignment {
   due_date : datetime,
   submission_type : string,
-  grade : float
 }
 
-class BackgroundSurvey
-
 class Announcement {
-  text : string,
-  pinned? : boolean
+  announcement_content : string,
+  pinned? : boolean,
+  announcement_manager_id : ID,
+}
+
+class Subscription {
+  student_id : ID,
+  announcement_manager_id : ID,
 }
 
 class CourseRegistration {
-  status : string
+  status : string,
+  course_id : ID,
+  student_id : ID,
 }
 
-abstract class Notification
-class EmailNotification
-class WebNotification
-class TextNotification
+class UserRegistration {
+  status : string,
+  user_type : string,
+  user_id : ID,
+}
+
+Teacher -- Course
+Department -- Course
+Semester -- Course
+AnnouncementManager -- Announcement
+AnnouncementManager -- Subscription
+User -- UserRegistration
+Course -- AnnouncementManager
+Course -- Activity
+Course -- CourseRegistration
+Student -- CourseRegistration
+User -- Notification
+
+abstract Notification {
+  user_id : ID,
+  message : string,
+}
 
 class Teacher extends User
 class Student extends User
 class Admin extends User
-class Resource extends Activity
-class Deliverable extends Activity
-class Tutorial extends Deliverable
-class Quiz extends Deliverable
-class Assignment extends Deliverable
-class BackgroundSurvey extends Deliverable
-class EmailNotification extends Notification
-class WebNotification extends Notification
-class TextNotification extends Notification
+Activity <|.. Resource
+Resource <|.. Video
+Resource <|.. URL
+Resource <|.. Document
+Activity <|.. Deliverable
+Deliverable <|.. Tutorial
+Deliverable <|.. Quiz
+Deliverable <|.. Assignment
+Notification <|.. EmailNotification
+Notification <|.. WebNotification
+Notification <|.. TextNotification
 
 @enduml
