@@ -1,0 +1,52 @@
+@startuml
+package activity.package {
+  class ResourceFactory {
+    create_resource(type, kwargs)
+  }
+
+  class DeliverableFactory {
+    create_deliverable(type, kwargs)
+  }
+
+  abstract class Resource {
+    type : string
+  }
+
+  ResourceFactory --> Resource: creates
+  DeliverableFactory --> Deliverable: creates
+
+  Resource <.. URL : "implements"
+  Resource <.. Document : "implements"
+  Resource <.. Video : "implements"
+
+  abstract class Deliverable {
+    weight : float,
+    proctored? : boolean
+    type : string
+  }
+
+  class Quiz {
+    time_opened : string,
+    time_closed : string,
+    allotted_time : string,
+    type : string
+  }
+
+  class Assignment {
+    due_date : datetime,
+    submission_type : string,
+  }
+
+  Deliverable <.. Tutorial : "implements"
+  Deliverable <.. Quiz : "implements"
+  Deliverable <.. Assignment : "implements"
+}
+
+class ActivityFactory {
+  create_activity(deliverable_type, kwargs)
+}
+
+ActivityFactory <.. ResourceFactory : extends
+ActivityFactory <.. DeliverableFactory : extends
+
+@enduml
