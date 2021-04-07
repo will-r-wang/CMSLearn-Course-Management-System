@@ -2,17 +2,16 @@
 title Visitor Pattern Class Diagram
 
 class Client << (S, orchid) >>
-Client --> Visitor
+Client --> AbstractVisitor
 Client --> Visitable
 
-Visitor <|.down. CommentsVisitor
-Visitor <|.down. GradesVisitor
-Visitor <|.down. FinalGradesVisitor
+AbstractVisitor <|.down. CommentsVisitor
+AbstractVisitor <|.down. GradesVisitor
 
 Visitable <|.down. Submission
 Visitable <|.down. Student
 
-interface Visitor {
+interface AbstractVisitor {
   visit()
 }
 
@@ -21,26 +20,24 @@ interface Visitable {
 }
 
 class CommentsVisitor {
-  visit_submission()
+  visit(Visitable: Submission)
 }
 
 class GradesVisitor {
-  visit_submission()
-}
-
-class FinalGradesVisitor {
-  visit_student()
+  visit(Visitable: Submission)
+  visit(Visitable: Student)
 }
 
 class Submission {
-  accept(a_visitor)
+  accept(AbstractVisitor: CommentsVisitor)
+  accept(AbstractVisitor: GradesVisitor)
   update_grade()
   update_comment()
 }
 
 class Student {
-  accept(a_visitor)
-  update_final_grade()
+  accept(AbstractVisitor: GradesVisitor)
+  update_grade()
 }
 @enduml
 

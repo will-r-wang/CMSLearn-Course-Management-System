@@ -7,15 +7,15 @@ participant Student
 participant FinalGradesVisitor
 
 == Updating Submission ==
-VisitableInterface->Submission:accept(a_visitor)
-Submission->GradesVisitor:visit_submission()
+VisitableInterface->Submission:accept(AbstractVisitor: GradesVisitor)
+Submission->GradesVisitor:visit(Visitable: Submission)
 GradesVisitor->Submission:update_grade()
-Submission->CommentsVisitor:visit_submission()
+Submission->CommentsVisitor:visit(Visitable: Submission)
 CommentsVisitor->Submission:update_comment()
 
 == Updating Final Grade ==
-VisitableInterface->Student:accept(a_visitor)
-Student->FinalGradesVisitor:visit_student()
-FinalGradesVisitor->Student:update_final_grade()
+VisitableInterface->Student:accept(AbstractVisitor: GradesVisitor)
+Student->GradesVisitor:visit(Visitable: Student)
+FinalGradesVisitor->Student:update_grade()
 @enduml
 
