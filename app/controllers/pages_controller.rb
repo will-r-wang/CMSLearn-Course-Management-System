@@ -1,9 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authorized
-
   def home
-    redirect_to '/login' unless logged_in?
-
     @user_registrations = UserRegistration.where(status: "pending") if admin?
     @course_registrations = CourseRegistration.where(status: "pending") if admin?
     @courses_teaching = Course.where(teacher_id: current_user.id) if teacher?
