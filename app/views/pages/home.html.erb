@@ -8,6 +8,8 @@
   <%= render 'admin_course_registrations' %>
 <% elsif teacher? %>
   <%= render 'teacher_course_portal' %>
+<% elsif student? %>
+  <%= render 'student_course_portal', courses: current_user.courses.distinct %>
 <% end %>
 
 <%= render 'course_search' %>
