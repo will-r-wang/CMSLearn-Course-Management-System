@@ -33,7 +33,6 @@ class CoursesController < ApplicationController
   def withdraw
     course_registration = CourseRegistration.find_by!(status: "approved", user: current_user, course: @course)
 
-    binding.pry
     if course_registration
       course_registration.update!(status: "withdrawn")
       flash[:notice] = "Course #{@course.course_code} successfully withdrawn."
