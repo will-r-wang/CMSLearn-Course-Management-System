@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_09_033556) do
+ActiveRecord::Schema.define(version: 2021_04_09_064207) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
@@ -18,11 +18,6 @@ ActiveRecord::Schema.define(version: 2021_04_09_033556) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_activities_on_course_id"
-  end
-
-  create_table "admins", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "announcement_managers", force: :cascade do |t|
@@ -128,21 +123,11 @@ ActiveRecord::Schema.define(version: 2021_04_09_033556) do
     t.index ["name"], name: "index_semesters_on_name"
   end
 
-  create_table "students", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "subscriptions", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "student_id"
     t.integer "announcement_manager_id"
-  end
-
-  create_table "teachers", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "text_notifications", force: :cascade do |t|
