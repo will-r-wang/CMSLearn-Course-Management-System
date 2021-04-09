@@ -8,20 +8,25 @@ package activity.package {
     create_deliverable(type, kwargs)
   }
 
-  abstract class Resource {
-    type : string
+  class Resource {
+    title : string,
+    hyperlink : string,
+    type : string,
   }
 
+  abstract Activity
   ResourceFactory --> Resource: creates
   DeliverableFactory --> Deliverable: creates
+  Activity <.. Resource : "implements"
+  Activity <.. Deliverable : "implements"
 
   Resource <.. URL : "implements"
   Resource <.. Document : "implements"
   Resource <.. Video : "implements"
 
-  abstract class Deliverable {
+  class Deliverable {
+    title : string,
     weight : float,
-    proctored? : boolean
     type : string
   }
 
@@ -42,7 +47,7 @@ package activity.package {
   Deliverable <.. Assignment : "implements"
 }
 
-class ActivityFactory {
+abstract class ActivityFactory {
   create_activity(deliverable_type, kwargs)
 }
 
