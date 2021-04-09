@@ -10,8 +10,6 @@ class PagesController < ApplicationController
     @course_results = if params[:filter].present?
       params[:filter].strip!
       Course.includes(:teacher, :semester).where("course_name = ? OR course_code = ?", params[:filter], params[:filter])
-    else
-      Course.includes(:teacher, :semester).all
     end
   end
 end

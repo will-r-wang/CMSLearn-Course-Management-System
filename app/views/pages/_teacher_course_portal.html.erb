@@ -21,7 +21,7 @@
               <td><%= course.semester.name %></td>
               <td><%= course.capacity %></td>
               <td><%= course.enrolled_students %></td>
-              <td><%= button_to "Edit", edit_course_path(course), :method => :get, class: 'btn btn-primary', form: {style: 'display:inline-block;'} %> |
+              <td><%= button_to "View", course_path(course), :method => :get, class: 'btn btn-info', form: {style: 'display:inline-block;'} %> | <%= button_to "Edit", edit_course_path(course), :method => :get, class: 'btn btn-primary', form: {style: 'display:inline-block;'} %> |
                 <button type="button" data-toggle="modal" data-target=".delete-modal" class='btn btn-danger'>Delete</button>
                 <div class="modal fade delete-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-lg">
