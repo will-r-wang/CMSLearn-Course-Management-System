@@ -40,10 +40,14 @@ class CoursesController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
+    if @course.update(course_params)
+      flash[:notice] = "Course successfully updated."
+      redirect_to course_path(@course)
+    else
+      flash[:notice] = @course.errors
+      redirect_to edit_course_path(@course)
+    end
   end
 
   def destroy
