@@ -2,12 +2,9 @@
 
 @import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
 
-$white: white;
-$black: black;
-
 .navbar {
   margin-bottom: 0;
-  background: $black;
+  background: black;
 }
 
 h1, h2 {
@@ -27,20 +24,23 @@ a:visited {
     font-size: 2rem;
   }
   padding: 2rem 2rem;
+  background-color: #181818;
+}
+
+.card {
+  background-color: #181818;
 }
 
 .link {
-  color: $white;
+  color: white;
 }
 
 .btn-primary {
-  color: $white;
-  border-color: $white;
   margin-bottom: 5px;
 }
 
 .btn-sm {
-  background-color: $white;
+  background-color: white;
   display: inline-block;
 }
 
@@ -66,8 +66,48 @@ mark {
 .my-4 {
   margin-bottom: 1rem !important;
   margin-top: 1rem !important;
+  background-color: #A9A9A9;
 }
 
 table, th, td {
-  border: 1px solid black;
+  border: 1px solid #181818;
+}
+
+th, td {
+  color: white;
+}
+
+.text-muted {
+  color: #A9A9A9 !important;
+}
+
+.navbar {
+  background: #181818;
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+@media screen and (prefers-color-scheme: light) {
+  body {
+    background-color: white;
+    color: black;
+  }
+}
+
+.modal-dialog {
+  background-color: #181818 !important;
+  color: #181818 !important;
+}
+
+.form-control {
+  background-color: #343a40 !important;
+  border: none;
+  color: white !important;
+}
+
+input, select, textarea {
+  color: white;
 }
