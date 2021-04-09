@@ -1,2 +1,61 @@
-<h1>Courses#show</h1>
-<p>Find me in app/views/courses/show.html.erb</p>
+<div class="jumbotron">
+  <h1 class>[<%= @course.semester.name %>] <%= @course.course_code %>: <%= @course.course_name %></h1>
+  <a href="/"><p class="lead">Dashboard</p></a>
+</div>
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Professor Details</h5>
+        <p class="card-text"><b>Full name: </b><%= @course.teacher.full_name %><br><b>Username: </b><%= @course.teacher.username %><br><b>Email: </b><%= @course.teacher.email %><br></p>
+        <p class="card-text"><small class="text-muted">Last updated at <%= @course.teacher.updated_at.localtime.strftime '%Y-%m-%d %H:%M:%S' %></small></p>
+        <%= button_to "Edit profile", edit_user_path(current_user), class: 'btn btn-secondary', :method => :get %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Course Info</h5>
+        <p class="card-text"><b>Course Name: </b><%= @course.course_name %><br><b>Course Code: </b><%= @course.course_code %><br><b>Capacity: </b><%= @course.enrolled_students %>/<%= @course.capacity %> [<mark><%= @course.capacity - @course.enrolled_students %> spots remaining</mark>]<br></p>
+        <p class="card-text"><small class="text-muted">Last updated at <%= @course.updated_at.localtime.strftime '%Y-%m-%d %H:%M:%S' %></small></p>
+        <%= button_to "Edit course", edit_course_path(@course), class: 'btn btn-secondary', :method => :get %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<br><br>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Students</h5>
+    <% unless @course.users.empty? %>
+      <table class="table table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Full Name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Registered At</th>
+            <th scope="col">Final Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @course.users.each do |student| %>
+            <tr>
+              <th scope="row"><%= student.full_name %></th>
+              <td><%= student.username %></td>
+              <td><%= student.active_course_registration(@course.id).created_at.localtime.strftime '%Y-%m-%d %H:%M:%S' %></td>
+              <td><%= student.active_course_registration(@course.id).final_grade %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>There are no students registered for this course.</p>
+    <% end %>
+  </div>
+</div>
+<br><br>
+
