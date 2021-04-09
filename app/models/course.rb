@@ -2,7 +2,7 @@ class Course < ApplicationRecord
   belongs_to :semester
   belongs_to :teacher
   has_many :course_registrations, dependent: :delete_all
-  has_many :users, through: :course_registrations
+  has_many :users, -> { where(course_registrations: { status: "approved" }) }, through: :course_registrations
   has_many :activity
   has_many :announcement
 

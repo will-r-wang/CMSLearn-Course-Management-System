@@ -3,7 +3,7 @@ class User < ApplicationRecord
   belongs_to :user_registration, optional: true
   has_many :user_registrations, dependent: :delete_all
   has_many :course_registrations, dependent: :delete_all
-  has_many :courses, through: :course_registrations
+  has_many :courses, -> { where(course_registrations: { status: "approved" }) }, through: :course_registrations
 
   has_secure_password
 
