@@ -18,7 +18,7 @@
             <th scope="col">Semester</th>
             <th scope="col">Capacity</th>
             <th scope="col">Enrolled</th>
-            <% if student? %>
+            <% if current_user.type == "Student" %>
               <th scope="col">Actions</th>
             <% end %>
           </tr>
@@ -32,7 +32,7 @@
               <td><%= course.semester.name %></td>
               <td><%= course.capacity %></td>
               <td><%= course.enrolled_students %></td>
-              <% if student? %>
+              <% if current_user.type == "Student" %>
                 <% if course.pending_registration? %>
                   <td>Pending registration</td>
                 <% elsif course.registered? %>
