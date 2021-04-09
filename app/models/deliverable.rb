@@ -1,3 +1,3 @@
-class Deliverable < ApplicationRecord
+class Deliverable < Activity
 
 end
