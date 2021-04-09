@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_09_064207) do
+ActiveRecord::Schema.define(version: 2021_04_09_065637) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
@@ -123,6 +123,16 @@ ActiveRecord::Schema.define(version: 2021_04_09_064207) do
     t.index ["name"], name: "index_semesters_on_name"
   end
 
+  create_table "submissions", force: :cascade do |t|
+    t.integer "deliverable_id"
+    t.integer "user_id", null: false
+    t.string "hyperlink"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["deliverable_id"], name: "index_submissions_on_deliverable_id"
+    t.index ["user_id"], name: "index_submissions_on_user_id"
+  end
+
   create_table "subscriptions", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -173,5 +183,7 @@ ActiveRecord::Schema.define(version: 2021_04_09_064207) do
 
   add_foreign_key "activities", "courses"
   add_foreign_key "course_registrations", "courses"
+  add_foreign_key "submissions", "deliverables"
+  add_foreign_key "submissions", "users"
   add_foreign_key "user_registrations", "users"
 end
