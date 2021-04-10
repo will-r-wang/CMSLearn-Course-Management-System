@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  resources :deliverables, except: [:index]
+  resources :assignments, controller: 'deliverables', type: 'Assignment'
+  resources :quizzes, controller: 'deliverables', type: 'Quiz'
+  resources :tutorials, controller: 'deliverables', type: 'Tutorial'
+
+  resources :resources, except: [:index]
+  resources :urls, controller: 'resources', type: 'Url'
+  resources :videos, controller: 'resources', type: 'Video'
+  resources :documents, controller: 'resources', type: 'Document'
+
   resources :course_registrations do
     post 'approve', on: :member
     post 'deny', on: :member

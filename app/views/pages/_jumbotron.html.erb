@@ -1,8 +1,8 @@
 <div class="jumbotron">
-  <h1 class="display-4">CMSLearn Dashboard</h1>
-  <p class="lead">Welcome <%= current_user.full_name %></p>
+  <h1 class>CMSLearn Dashboard</h1>
+  <p class="lead">Welcome <%= user.full_name %></p>
   <hr class="my-4">
-  <p><b><%= current_semester.name %> semester:</b><br>End date: <%= current_semester.end_date.strftime '%Y-%m-%d' %><br>Days Remaining: <%= (current_semester.end_date - Date.today).to_i %> days.</p>
+  <p><b><%= semester.name %> semester:</b><br>End date: <%= semester.end_date.strftime '%Y-%m-%d' %><br>Days Remaining: <%= (semester.end_date - Date.today).to_i %> days.</p>
 </div>
 
 

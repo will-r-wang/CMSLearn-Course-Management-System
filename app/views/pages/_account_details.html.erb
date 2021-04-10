@@ -2,10 +2,10 @@
   <div class="col-lg-6">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Your account</h5>
-        <p class="card-text"><b>Full name: </b><%= current_user.full_name %><br><b>Username: </b><%= current_user.username %><br><b>Email: </b><%= current_user.email %><br><b>Account Type: </b><mark><%= account_type %></mark></p>
-        <p class="card-text"><small class="text-muted">Last updated at <%= current_user.updated_at.localtime.strftime '%Y-%m-%d %H:%M:%S' %></small></p>
-        <%= button_to "Edit profile", edit_user_path(current_user), class: 'btn btn-secondary', :method => :get %>
+        <h5 class="card-title">User Details</h5>
+        <p class="card-text"><b>Full name: </b><%= user.full_name %><br><b>Username: </b><%= user.username %><br><b>Email: </b><%= user.email %><br><b>Account Type: </b><mark><%= user.type %></mark></p>
+        <p class="card-text"><small class="text-muted">Last updated at <%= user.updated_at.localtime.strftime '%Y-%m-%d %H:%M:%S' %></small></p>
+        <%= button_to "Edit profile", edit_user_path(user), class: 'btn btn-secondary', :method => :get %>
       </div>
     </div>
   </div>

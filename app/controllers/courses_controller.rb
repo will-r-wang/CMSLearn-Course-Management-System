@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   skip_before_action :authorized
-  before_action :set_course, only: %i[ show edit update destroy register withdraw ]
+  before_action :set_session_course, :set_course, only: %i[ show edit update destroy register withdraw ]
 
   def new
     @course = Course.new
@@ -33,7 +33,6 @@ class CoursesController < ApplicationController
   def withdraw
     course_registration = CourseRegistration.find_by!(status: "approved", user: current_user, course: @course)
 
-    binding.pry
     if course_registration
       course_registration.update!(status: "withdrawn")
       flash[:notice] = "Course #{@course.course_code} successfully withdrawn."
@@ -41,10 +40,14 @@ class CoursesController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
+    if @course.update(course_params)
+      flash[:notice] = "Course successfully updated."
+      redirect_to course_path(@course)
+    else
+      flash[:notice] = @course.errors
+      redirect_to edit_course_path(@course)
+    end
   end
 
   def destroy
@@ -56,6 +59,10 @@ class CoursesController < ApplicationController
   private
   def set_course
     @course = Course.find(params[:id])
+  end
+
+  def set_session_course
+    session[:course_id] = params[:id]
   end
 
   def course_params

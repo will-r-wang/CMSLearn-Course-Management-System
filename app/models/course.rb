@@ -2,12 +2,20 @@ class Course < ApplicationRecord
   belongs_to :semester
   belongs_to :teacher
   has_many :course_registrations, dependent: :delete_all
-  has_many :activity
-  has_many :student_courses
-  has_many :students, through: :student_courses
-  has_many :announcement
+  has_many :users, -> { where(course_registrations: { status: "approved" }) }, through: :course_registrations
+  has_many :deliverables
+  has_many :resources
+  has_many :announcements
 
   def enrolled_students
-    student_courses.count
+    CourseRegistration.where(course_id: id, status: "approved").count
+  end
+
+  def pending_registration?
+    !CourseRegistration.where(course_id: id, status: "pending").empty?
+  end
+
+  def registered?
+    !CourseRegistration.where(course_id: id, status: "approved").empty?
   end
 end

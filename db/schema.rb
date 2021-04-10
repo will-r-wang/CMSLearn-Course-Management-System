@@ -10,20 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_07_120337) do
-
-  create_table "activities", force: :cascade do |t|
-    t.string "name"
-    t.integer "course_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_id"], name: "index_activities_on_course_id"
-  end
-
-  create_table "admins", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+ActiveRecord::Schema.define(version: 2021_04_10_055744) do
 
   create_table "announcement_managers", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -39,19 +26,13 @@ ActiveRecord::Schema.define(version: 2021_04_07_120337) do
     t.index ["announcement_manager_id"], name: "index_announcements_on_announcement_manager_id"
   end
 
-  create_table "assignments", force: :cascade do |t|
-    t.datetime "due_date"
-    t.string "submission_type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "course_registrations", force: :cascade do |t|
     t.string "status"
     t.integer "course_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.integer "grade"
     t.index ["course_id"], name: "index_course_registrations_on_course_id"
     t.index ["user_id"], name: "index_course_registrations_on_user_id"
   end
@@ -72,18 +53,19 @@ ActiveRecord::Schema.define(version: 2021_04_07_120337) do
 
   create_table "deliverables", force: :cascade do |t|
     t.integer "weight", default: 0
-    t.boolean "proctored", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "course_id"
+    t.string "title"
+    t.string "type"
+    t.string "instructions"
+    t.index ["course_id"], name: "index_deliverables_on_course_id"
   end
 
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "documents", force: :cascade do |t|
   end
 
   create_table "email_notifications", force: :cascade do |t|
@@ -101,20 +83,15 @@ ActiveRecord::Schema.define(version: 2021_04_07_120337) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
-  create_table "quizzes", force: :cascade do |t|
-    t.datetime "time_opened"
-    t.datetime "time_closed"
-    t.time "alloted_time"
-    t.string "type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "resources", force: :cascade do |t|
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "hyperlink"
+    t.integer "course_id"
+    t.string "title"
+    t.string "description"
+    t.index ["course_id"], name: "index_resources_on_course_id"
   end
 
   create_table "semesters", force: :cascade do |t|
@@ -127,9 +104,16 @@ ActiveRecord::Schema.define(version: 2021_04_07_120337) do
     t.index ["name"], name: "index_semesters_on_name"
   end
 
-  create_table "students", force: :cascade do |t|
+  create_table "submissions", force: :cascade do |t|
+    t.integer "deliverable_id"
+    t.integer "user_id", null: false
+    t.string "hyperlink"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "grade"
+    t.string "comment"
+    t.index ["deliverable_id"], name: "index_submissions_on_deliverable_id"
+    t.index ["user_id"], name: "index_submissions_on_user_id"
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -139,22 +123,9 @@ ActiveRecord::Schema.define(version: 2021_04_07_120337) do
     t.integer "announcement_manager_id"
   end
 
-  create_table "teachers", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "text_notifications", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "tutorials", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "urls", force: :cascade do |t|
   end
 
   create_table "user_registrations", force: :cascade do |t|
@@ -177,15 +148,13 @@ ActiveRecord::Schema.define(version: 2021_04_07_120337) do
     t.string "type"
   end
 
-  create_table "videos", force: :cascade do |t|
-  end
-
   create_table "web_notifications", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "activities", "courses"
   add_foreign_key "course_registrations", "courses"
+  add_foreign_key "submissions", "deliverables"
+  add_foreign_key "submissions", "users"
   add_foreign_key "user_registrations", "users"
 end

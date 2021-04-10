@@ -1,5 +1,6 @@
 <nav class="navbar navbar-dark navbar-static-top navbar-expand-md">
   <div class="container">
+    <%= link_to image_tag('cmslearn.svg', style: 'height: 60px; margin-top: 0px;'), root_path %>
     </button> <%= link_to "CMSLearn", root_path, class: 'navbar-brand' %>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="navbar-nav mr-auto">
@@ -11,12 +12,10 @@
         <% if logged_in? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= current_user_full_name %>
+              <%= current_user.full_name %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Profile</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Preferences</a>
+              <a class="dropdown-item" href="<%= edit_user_path(current_user) %>">Edit Profile</a>
             </div>
           </li>
           <li class='nav-item'><%= link_to 'Logout', '/logout', class: 'nav-link' %></li>

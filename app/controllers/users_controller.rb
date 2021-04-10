@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :authorized, only: [:new, :create]
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :sanitize_params, only: %i[ edit update ]
 
   def index
     @users = klass.all
@@ -49,6 +50,16 @@ class UsersController < ApplicationController
   private
   def set_user
     @user = klass.find(params[:id])
+  end
+
+  def sanitize_params
+    if params.has_key? :admin
+      params[:user] = params.delete :admin
+    elsif params.has_key? :student
+      params[:user] = params.delete :student
+    elsif params.has_key? :teacher
+      params[:user] = params.delete :teacher
+    end
   end
 
   def klass

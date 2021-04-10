@@ -1,2 +1,7 @@
-<h1>Courses#show</h1>
-<p>Find me in app/views/courses/show.html.erb</p>
+<%= render 'jumbotron' %>
+
+<% if current_user.type == "Student" %>
+  <%= render 'student_view' %>
+<% else %>
+  <%= render 'admin_view' %>
+<% end %>

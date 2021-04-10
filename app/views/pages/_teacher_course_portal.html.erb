@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Your courses</h5>
+    <h5 class="card-title">My courses</h5>
     <% unless @courses_teaching.empty? %>
       <table class="table table-sm">
         <thead class="thead-dark">
@@ -21,7 +21,7 @@
               <td><%= course.semester.name %></td>
               <td><%= course.capacity %></td>
               <td><%= course.enrolled_students %></td>
-              <td><%= button_to "Edit", edit_course_path(course), :method => :get, class: 'btn btn-primary', form: {style: 'display:inline-block;'} %> |
+              <td><%= button_to "View", course_path(course), :method => :get, class: 'btn btn-info', form: {style: 'display:inline-block;'} %> | <%= button_to "Edit", edit_course_path(course), :method => :get, class: 'btn btn-primary', form: {style: 'display:inline-block;'} %> |
                 <button type="button" data-toggle="modal" data-target=".delete-modal" class='btn btn-danger'>Delete</button>
                 <div class="modal fade delete-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-lg">

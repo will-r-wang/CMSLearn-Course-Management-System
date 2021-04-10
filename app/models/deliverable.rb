@@ -1,3 +1,3 @@
-class Deliverable < ApplicationRecord
-  self.abstract_class = true
+class Deliverable < Activity
+  has_many :submissions, dependent: :delete_all
 end
