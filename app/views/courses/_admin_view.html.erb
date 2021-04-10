@@ -1,0 +1,159 @@
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Teacher Details</h5>
+        <p class="card-text"><b>Full name: </b><%= @course.teacher.full_name %><br><b>Username: </b><%= @course.teacher.username %><br><b>Email: </b><%= @course.teacher.email %><br></p>
+        <p class="card-text"><small class="text-muted">Last updated at <%= @course.teacher.updated_at.localtime.strftime '%Y-%m-%d %H:%M:%S' %></small></p>
+        <%= button_to "Edit profile", edit_user_path(current_user), class: 'btn btn-secondary', :method => :get %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Course Info</h5>
+        <p class="card-text"><b>Course Name: </b><%= @course.course_name %><br><b>Course Code: </b><%= @course.course_code %><br><b>Capacity: </b><%= @course.enrolled_students %>/<%= @course.capacity %> [<mark><%= @course.capacity - @course.enrolled_students %> spots remaining</mark>]<br></p>
+        <p class="card-text"><small class="text-muted">Last updated at <%= @course.updated_at.localtime.strftime '%Y-%m-%d %H:%M:%S' %></small></p>
+        <%= button_to "Edit course", edit_course_path(@course), class: 'btn btn-secondary', :method => :get %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<br><br>
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Resources</h5>
+        <% unless @course.resources.empty? %>
+          <table class="table table-sm">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Type</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @course.resources.each do |resource| %>
+                <tr>
+                  <th scope="row"><%= resource.title %></th>
+                  <td><%= resource.created_at.localtime.strftime '%Y-%m-%d %H:%M:%S' %></td>
+                  <td><%= resource.type %></td>
+                  <td><%= button_to "View", resource_path(resource), :method => :get, class: 'btn btn-info', form: {style: 'display:inline-block;'} %> | <%= button_to "Edit", edit_resource_path(resource), :method => :get, class: 'btn btn-primary', form: {style: 'display:inline-block;'} %> |
+                    <button type="button" data-toggle="modal" data-target=".delete-modal" class='btn btn-danger'>Delete</button>
+                    <div class="modal fade delete-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Delete Resource "<%= resource.title %>"?</h5>
+                          </div>
+                          <div class="modal-body">
+                            <p>Are you sure you want to delete this resource? This is an irreversible action!</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <%= button_to "Delete", {:controller => :resources, :action => 'destroy', :id => resource.id }, :method => :delete, class: 'btn btn-danger', form: {style: 'display:inline-block;'} %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <p>There are no resources created for this course.</p>
+        <% end %>
+        <%= button_to "Create Resource", new_resource_path, class: 'btn btn-primary', :method => :get %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Deliverables</h5>
+        <% unless @course.deliverables.empty? %>
+          <table class="table table-sm">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Type</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @course.deliverables.each do |deliverable| %>
+                <tr>
+                  <th scope="row"><%= deliverable.title %></th>
+                  <td><%= deliverable.created_at.localtime.strftime '%Y-%m-%d %H:%M:%S' %></td>
+                  <td><%= deliverable.type %></td>
+                  <td> <%= button_to "View", deliverable_path(deliverable), :method => :get, class: 'btn btn-info', form: {style: 'display:inline-block;'} %> | <%= button_to "Edit", edit_deliverable_path(deliverable), :method => :get, class: 'btn btn-primary', form: {style: 'display:inline-block;'} %> |
+                    <button type="button" data-toggle="modal" data-target=".delete-modal" class='btn btn-danger'>Delete</button>
+                    <div class="modal fade delete-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Delete Deliverable "<%= deliverable.title %>"?</h5>
+                          </div>
+                          <div class="modal-body">
+                            <p>Are you sure you want to delete this deliverable? This is an irreversible action and will remove all associated submissions!</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <%= button_to "Delete", {:controller => :deliverables, :action => 'destroy', :id => deliverable.id }, :method => :delete, class: 'btn btn-danger', form: {style: 'display:inline-block;'} %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <p>There are no deliverables created for this course.</p>
+        <% end %>
+        <%= button_to "Create Deliverable", new_deliverable_path, class: 'btn btn-primary', :method => :get %>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Students</h5>
+    <% unless @course.users.empty? %>
+      <table class="table table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Full Name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Registered At</th>
+            <th scope="col">Final Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @course.users.each do |student| %>
+            <tr>
+              <th scope="row"><%= student.full_name %></th>
+              <td><%= student.username %></td>
+              <td><%= student.active_course_registration(@course.id).created_at.localtime.strftime '%Y-%m-%d %H:%M:%S' %></td>
+              <td><%= student.active_course_registration(@course.id).final_grade %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>There are no students registered for this course.</p>
+    <% end %>
+  </div>
+</div>
+<br><br>

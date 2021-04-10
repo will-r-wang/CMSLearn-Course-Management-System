@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Teacher Details</h5>
+        <p class="card-text"><b>Full name: </b><%= @course.teacher.full_name %><br><b>Username: </b><%= @course.teacher.username %><br><b>Email: </b><%= @course.teacher.email %><br></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Course Info</h5>
+        <p class="card-text"><b>Course Name: </b><%= @course.course_name %><br><b>Course Code: </b><%= @course.course_code %><br><b>Capacity: </b><%= @course.enrolled_students %>/<%= @course.capacity %> [<mark><%= @course.capacity - @course.enrolled_students %> spots remaining</mark>]<br></p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<br><br>
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Resources</h5>
+        <% unless @course.resources.empty? %>
+          <table class="table table-sm">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Type</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @course.resources.each do |resource| %>
+                <tr>
+                  <th scope="row"><%= resource.title %></th>
+                  <td><%= resource.created_at.localtime.strftime '%Y-%m-%d %H:%M:%S' %></td>
+                  <td><%= resource.type %></td>
+                  <td><%= button_to "View", resource_path(resource), :method => :get, class: 'btn btn-info', form: {style: 'display:inline-block;'} %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <p>There are no resources created for this course.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Deliverables</h5>
+        <% unless @course.deliverables.empty? %>
+          <table class="table table-sm">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Type</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @course.deliverables.each do |deliverable| %>
+                <tr>
+                  <th scope="row"><%= deliverable.title %></th>
+                  <td><%= deliverable.weight %></td>
+                  <td><%= deliverable.created_at.localtime.strftime '%Y-%m-%d %H:%M:%S' %></td>
+                  <td><%= deliverable.type %></td>
+                  <td> <%= button_to "View", deliverable_path(deliverable), :method => :get, class: 'btn btn-info', form: {style: 'display:inline-block;'} %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <p>There are no deliverables created for this course.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Timeline</h5>
+  </div>
+</div>
+<br><br>
