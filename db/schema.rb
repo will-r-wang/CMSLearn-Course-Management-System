@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_09_070548) do
+ActiveRecord::Schema.define(version: 2021_04_10_021712) do
 
   create_table "announcement_managers", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2021_04_09_070548) do
     t.integer "course_id"
     t.string "title"
     t.string "type"
+    t.string "instructions"
     t.index ["course_id"], name: "index_deliverables_on_course_id"
   end
 
@@ -89,6 +90,7 @@ ActiveRecord::Schema.define(version: 2021_04_09_070548) do
     t.string "hyperlink"
     t.integer "course_id"
     t.string "title"
+    t.string "description"
     t.index ["course_id"], name: "index_resources_on_course_id"
   end
 
