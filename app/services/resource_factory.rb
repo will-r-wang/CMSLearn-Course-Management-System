@@ -7,10 +7,10 @@ class ResourceFactory < ActivityFactory
     case type
     when "Url"
       Url.find_or_create_by!(kwargs)
-    when "Assignment"
-      Assignment.find_or_create_by!(kwargs)
-    when "Tutorial"
-      Tutorial.find_or_create_by!(kwargs)
+    when "Video"
+      Video.find_or_create_by!(kwargs)
+    when "Document"
+      Document.find_or_create_by!(kwargs)
     else
       raise NotImplementedError
     end
