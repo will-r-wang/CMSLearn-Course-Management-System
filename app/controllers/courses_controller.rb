@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   skip_before_action :authorized
-  before_action :set_course, only: %i[ show edit update destroy register withdraw ]
+  before_action :set_session_course, :set_course, only: %i[ show edit update destroy register withdraw ]
 
   def new
     @course = Course.new
@@ -59,6 +59,10 @@ class CoursesController < ApplicationController
   private
   def set_course
     @course = Course.find(params[:id])
+  end
+
+  def set_session_course
+    session[:course_id] = params[:id]
   end
 
   def course_params
