@@ -1,5 +1,6 @@
 class ResourcesController < ApplicationController
   before_action :set_resource, only: %i[ show edit update destroy ]
+  before_action :sanitize_params, only: %i[ edit update ]
 
   def new
     @resource = klass.new
@@ -38,6 +39,16 @@ class ResourcesController < ApplicationController
   private
   def set_resource
     @resource = klass.find(params[:id])
+  end
+
+  def sanitize_params
+    if params.has_key? :video
+      params[:resource] = params.delete :video
+    elsif params.has_key? :url
+      params[:resource] = params.delete :url
+    elsif params.has_key? :document
+      params[:resource] = params.delete :document
+    end
   end
 
   def klass

@@ -1,5 +1,6 @@
 class DeliverablesController < ApplicationController
   before_action :set_deliverable, only: %i[ show edit update destroy ]
+  before_action :sanitize_params, only: %i[ edit update ]
 
   def new
     @deliverable = klass.new
@@ -38,6 +39,16 @@ class DeliverablesController < ApplicationController
   private
   def set_deliverable
     @deliverable = klass.find(params[:id])
+  end
+
+  def sanitize_params
+    if params.has_key? :quiz
+      params[:deliverable] = params.delete :quiz
+    elsif params.has_key? :assignment
+      params[:deliverable] = params.delete :assignment
+    elsif params.has_key? :tutorial
+      params[:deliverable] = params.delete :tutorial
+    end
   end
 
   def klass
