@@ -1,0 +1,15 @@
+<div class="jumbotron">
+  <h1>[<%= @resource.course.course_code %>: <%= @resource.course.course_name %>] <%= @resource.title %></h1>
+  <a href="<%= course_path(@resource.course) %>"><p class="lead">Course</p></a>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Details</h5>
+    <p class="card-text"><b>Title: </b><%= @resource.title %><br><b>Created At: </b><%= @resource.created_at %><br><b>Description: </b><%= @resource.description %><br><b>Hyperlink: </b><%= @resource.hyperlink %><br></p>
+  </div>
+</div>
+<br><br>
+
+<br>
+<%= link_to 'Back', course_path(@resource.course) %>

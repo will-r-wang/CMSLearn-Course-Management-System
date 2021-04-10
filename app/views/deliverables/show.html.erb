@@ -1,0 +1,44 @@
+<div class="jumbotron">
+  <h1>[<%= @deliverable.course.course_code %>: <%= @deliverable.course.course_name %>] <%= @deliverable.title %></h1>
+  <a href="<%= course_path(@deliverable.course) %>"><p class="lead">Course</p></a>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Details</h5>
+    <p class="card-text"><b>Title: </b><%= @deliverable.title %><br><b>Created At: </b><%= @deliverable.created_at %><br><b>Weight: </b><%= @deliverable.weight %>%<br><b>Instructions: </b><%= @deliverable.instructions %><br></p>
+  </div>
+</div>
+<br><br>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Submissions</h5>
+    <% unless @deliverable.submissions.empty? %>
+      <table class="table table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Full Name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Registered At</th>
+            <th scope="col">Final Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @course.users.each do |student| %>
+            <tr>
+              <th scope="row"><%= student.full_name %></th>
+              <td><%= student.username %></td>
+              <td><%= student.active_course_registration(@course.id).created_at.localtime.strftime '%Y-%m-%d %H:%M:%S' %></td>
+              <td><%= student.active_course_registration(@course.id).final_grade %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>There are no submissions for this deliverable.</p>
+    <% end %>
+  </div>
+</div>
+<br>
+<%= link_to 'Back', course_path(@deliverable.course) %>
