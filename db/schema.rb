@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_10_021712) do
+ActiveRecord::Schema.define(version: 2021_04_10_055744) do
 
   create_table "announcement_managers", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2021_04_10_021712) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
-    t.integer "final_grade"
+    t.integer "grade"
     t.index ["course_id"], name: "index_course_registrations_on_course_id"
     t.index ["user_id"], name: "index_course_registrations_on_user_id"
   end
@@ -110,6 +110,8 @@ ActiveRecord::Schema.define(version: 2021_04_10_021712) do
     t.string "hyperlink"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "grade"
+    t.string "comment"
     t.index ["deliverable_id"], name: "index_submissions_on_deliverable_id"
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end
