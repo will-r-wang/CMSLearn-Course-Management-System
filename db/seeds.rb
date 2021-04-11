@@ -62,7 +62,9 @@ STUDENT_COUNT.times do |i|
     first_name: first_name,
     last_name: last_name,
     username: "student#{i}",
-    email: "#{first_name.downcase}.#{last_name.downcase}@cmslearn.com"
+    email: "#{first_name.downcase}.#{last_name.downcase}@cmslearn.com",
+    age: RandomGaussian.new(20, 2).rand.ceil,
+    gender: [true, false].sample ? "male" : "female",
   ) do |student|
     student.password = "student#{i}"
   end
