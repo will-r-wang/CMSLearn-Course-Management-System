@@ -3,8 +3,9 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
+require("chartkick/chart.js")
+
 import "bootstrap"
-import "../stylesheets/application"
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"

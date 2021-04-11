@@ -1,31 +1,120 @@
-begin
-  Admin.create!(first_name: "John", last_name: "Smith", username: "admin", password: "admin", email: "john@smith.com")
-rescue ActiveRecord::RecordInvalid
-  puts "Validation failed: username \"admin\" has already been taken"
+require 'faker'
+
+# helper integer function roman to help with roman numeral conversion
+class Integer
+  ROMAN_NUMBERS = {
+    1000 => "M",
+    900 => "CM",
+    500 => "D",
+    400 => "CD",
+    100 => "C",
+    90 => "XC",
+    50 => "L",
+    40 => "XL",
+    10 => "X",
+    9 => "IX",
+    5 => "V",
+    4 => "IV",
+    1 => "I",
+  }
+
+  def roman
+    n = self
+    roman = ""
+    ROMAN_NUMBERS.each do |value, letter|
+      roman << letter * (n / value)
+      n = n % value
+    end
+    return roman
+  end
 end
 
-begin
-  Student.create!(first_name: "Jill", last_name: "Smith", username: "jill", password: "smith", email: "jill@smith.com")
-rescue ActiveRecord::RecordInvalid
-  puts "Validation failed: username \"jill\" has already been taken"
-end
+puts "Seeding the database..."
 
-begin
-  Teacher.create!(first_name: "Janet", last_name: "Georges", username: "janet", password: "janet", email: "janet@georges.com")
-rescue ActiveRecord::RecordInvalid
-  puts "Validation failed: username \"janet\" has already been taken"
-end
+ADMIN_COUNT = 3
+STUDENT_COUNT = 30
+TEACHER_COUNT = 5
+SEMESTER_COUNT = 5
+COURSE_COUNT = 15
+SEMESTER_SEASONS = %w(Fall Winter Summer)
+BASE_START_DATE = "September 9 2020".to_date
 
-begin
-  Semester.create!(name: "Fall 2020", start_date: "Septermber 9 2020".to_date, end_date: "December 11 2020".to_date, registration_deadline: "September 23, 2020".to_date)
-  current_semester = Semester.create!(name: "Winter 2021", start_date: "January 11 2021".to_date, end_date: "April 14 2021".to_date, registration_deadline: "January 25, 2020".to_date)
-  Semester.create!(name: "Summer 2021", start_date: "May 13 2021".to_date, end_date: "August 16 2021".to_date, registration_deadline: "May 20 2021".to_date)
-  Semester.create!(name: "Fall 2021", start_date: "Septermber 8 2021".to_date, end_date: "December 10 2021".to_date, registration_deadline: "September 22, 2021".to_date)
-  Semester.create!(name: "Winter 2022", start_date: "January 10 2022".to_date, end_date: "April 12 2022".to_date, registration_deadline: "January 24, 2022".to_date)
+ADMIN_COUNT.times do |i|
+  first_name = Faker::Name.first_name
+  last_name = Faker::Name.last_name
 
-  Course.create!(course_name: "Introduction to Computer Science", course_code: "COMP1405", capacity: 1500, semester: current_semester, teacher: Teacher.last)
-  Course.create!(course_name: "Introduction to Computer Science II", course_code: "COMP1406", capacity: 1200, semester: current_semester, teacher: Teacher.last)
-  Course.create!(course_name: "Object Oriented Programming", course_code: "COMP3004", capacity: 500, semester: current_semester, teacher: Teacher.last)
-rescue ActiveRecord::RecordInvalid
-  puts "Validation failed: name has already been taken"
+  Admin.find_or_create_by!(
+    first_name: first_name,
+    last_name: last_name,
+    username: "admin#{i}",
+    email: "#{first_name.downcase}.#{last_name.downcase}@cmslearn.com"
+  ) do |admin|
+    admin.password = "admin#{i}"
+  end
 end
+puts "Admins successfully created."
+
+STUDENT_COUNT.times do |i|
+  first_name = Faker::Name.first_name
+  last_name = Faker::Name.last_name
+
+  Student.find_or_create_by!(
+    first_name: first_name,
+    last_name: last_name,
+    username: "student#{i}",
+    email: "#{first_name.downcase}.#{last_name.downcase}@cmslearn.com"
+  ) do |student|
+    student.password = "student#{i}"
+  end
+end
+puts "Students successfully created."
+
+TEACHER_COUNT.times do |i|
+  first_name = Faker::Name.unique.first_name
+  last_name = Faker::Name.unique.last_name
+
+  Teacher.find_or_create_by!(
+    first_name: first_name,
+    last_name: last_name,
+    username: "teacher#{i}",
+    email: "#{first_name.downcase}.#{last_name.downcase}@cmslearn.com"
+  ) do |teacher|
+    teacher.password = "teacher#{i}"
+  end
+end
+puts "Teachers successfully created."
+
+SEMESTER_COUNT.times do |i|
+  start_date = BASE_START_DATE + (i * 4).months
+  Semester.find_or_create_by!(
+    name: "#{SEMESTER_SEASONS[(start_date.month / 3.0).ceil % 3]} #{start_date.year}",
+    start_date: start_date,
+    end_date: start_date + 4.months,
+    registration_deadline: start_date + 3.weeks
+  )
+end
+puts "Semesters successfully created."
+
+CURRENT_SEMESTER = Semester.where('start_date < ? AND end_date > ?', Date.today, Date.today).first
+COURSE_COUNT.times do |i|
+  Course.find_or_create_by!(
+    course_name: "Computer Science #{(i+1).roman}",
+    course_code: "COMP#{100+i}",
+    capacity: 1500,
+    semester: CURRENT_SEMESTER,
+    teacher: Teacher.limit(1).offset(i % TEACHER_COUNT).first
+  )
+end
+puts "Courses successfully created."
+
+# create 5 registrations each for the first 5 courses
+5.times do |i|
+  5.times do |j|
+    CourseRegistration.find_or_create_by!(
+      course: Course.limit(1).offset(i).first,
+      user: Student.limit(1).offset(j).first,
+      status: "pending",
+    )
+  end
+end
+puts "Course registrations successfully created."
