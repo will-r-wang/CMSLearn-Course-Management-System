@@ -1,7 +1,12 @@
 class CompositeFilteringStrategy
-  def get_data(input_data, options = {})
+  def initialize
+    @strategies = []
+  end
+
+  def get_data(input_data)
+    @data ||= input_data
     @strategies.each do |strategy|
-      @data = strategy.get_data(@data, options)
+      @data = strategy.get_data(@data)
     end
 
     @data
