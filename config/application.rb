@@ -8,6 +8,7 @@ module COMP3004Cms
     config.load_defaults 6.1
 
     config.autoload_paths += [
+      "#{Rails.root}/lib",
       "#{Rails.root}/app/services/factories",
     ]
   end

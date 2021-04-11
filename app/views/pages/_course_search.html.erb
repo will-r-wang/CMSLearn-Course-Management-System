@@ -33,9 +33,9 @@
                 <td><%= course.capacity %></td>
                 <td><%= course.enrolled_students %></td>
                 <% if current_user.type == "Student" %>
-                  <% if course.pending_registration? %>
+                  <% if course.pending_registration?(current_user.id) %>
                     <td>Pending registration</td>
-                  <% elsif course.registered? %>
+                  <% elsif course.registered?(current_user.id) %>
                     <td><%= button_to "Withdraw", withdraw_course_path(course), :method => :post, class: 'btn btn-danger', form: {style: 'display:inline-block;'} %></td>
                   <% else %>
                     <td><%= button_to "Register", register_course_path(course), :method => :post, class: 'btn btn-primary', form: {style: 'display:inline-block;'} %></td>

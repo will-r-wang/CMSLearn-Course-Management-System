@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_10_055744) do
+ActiveRecord::Schema.define(version: 2021_04_11_135155) do
 
   create_table "announcement_managers", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -146,6 +146,8 @@ ActiveRecord::Schema.define(version: 2021_04_10_055744) do
     t.string "password_digest"
     t.string "email"
     t.string "type"
+    t.string "gender"
+    t.integer "age"
   end
 
   create_table "web_notifications", force: :cascade do |t|

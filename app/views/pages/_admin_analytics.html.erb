@@ -1,8 +1,23 @@
-<div class="card">
+<div class="card" style="background-color: white;">
   <div class="card-body">
-    <h5 class="card-title">Analytics</h5>
-    <%= pie_chart User.group(:type).count %>
+    <h5 class="card-title" style="color: black;">Analytics</h5>
+    <div class="row">
+      <div class="col-lg-4">
+        <%= pie_chart User.group(:type).count, title: "User type distribution" %>
+      </div>
+      <div class="col-lg-8">
+        <%= scatter_chart @chart_data, title: "All student grades", xtitle: "Student ID", ytitle: "Grade", style: 'inline-block: true; width: 200px;' %>
+      </div>
+    </div>
+    <br><br>
+    <div class="row">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-10">
+        <h5 style="text-align: center; color: black;"><b>Semester timeline</b></h5>
+        <%= timeline @semester_timelines, title: "Semester timeline" %>
+      </div>
+      <div class="col-lg-1"></div>
+    </div>
   </div>
 </div>
 <br><br>
-
