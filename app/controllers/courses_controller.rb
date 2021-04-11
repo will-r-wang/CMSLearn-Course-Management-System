@@ -20,6 +20,13 @@ class CoursesController < ApplicationController
     end
   end
 
+  def show
+    if current_user.type == "Student"
+      course_registration = CourseRegistration.find_by!(status: "approved", user: current_user, course: @course)
+      @grade = course_registration.grade
+    end
+  end
+
   def register
     create_course_registration
   rescue

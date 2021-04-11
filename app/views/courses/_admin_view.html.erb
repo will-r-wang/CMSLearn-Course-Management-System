@@ -137,7 +137,7 @@
             <th scope="col">Full Name</th>
             <th scope="col">Username</th>
             <th scope="col">Registered At</th>
-            <th scope="col">Final Grade</th>
+            <th scope="col">Grade</th>
           </tr>
         </thead>
         <tbody>
@@ -146,7 +146,7 @@
               <th scope="row"><%= student.full_name %></th>
               <td><%= student.username %></td>
               <td><%= student.active_course_registration(@course.id).created_at.localtime.strftime '%Y-%m-%d %H:%M:%S' %></td>
-              <td><%= student.active_course_registration(@course.id).final_grade %></td>
+              <td><%= student.active_course_registration(@course.id).grade %></td>
             </tr>
           <% end %>
         </tbody>
