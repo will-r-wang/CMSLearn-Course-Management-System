@@ -11,11 +11,11 @@ class Course < ApplicationRecord
     CourseRegistration.where(course_id: id, status: "approved").count
   end
 
-  def pending_registration?
-    !CourseRegistration.where(course_id: id, status: "pending").empty?
+  def pending_registration?(user_id)
+    !CourseRegistration.where(course_id: id, user_id: user_id, status: "pending").empty?
   end
 
-  def registered?
-    !CourseRegistration.where(course_id: id, status: "approved").empty?
+  def registered?(user_id)
+    !CourseRegistration.where(course_id: id, user_id: user_id, status: "approved").empty?
   end
 end
