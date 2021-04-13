@@ -4,18 +4,19 @@ participant Submission
 participant GradesVisitor
 participant CommentsVisitor
 participant Student
-participant FinalGradesVisitor
 
 == Updating Submission ==
 VisitableInterface->Submission:accept(AbstractVisitor: GradesVisitor)
 Submission->GradesVisitor:visit(Visitable: Submission)
-GradesVisitor->Submission:update_grade()
+GradesVisitor->Submission:update_grade(grade: integer)
 Submission->CommentsVisitor:visit(Visitable: Submission)
-CommentsVisitor->Submission:update_comment()
+CommentsVisitor->Submission:update_comment(comment: string)
 
-== Updating Final Grade ==
+== Updating Student ==
 VisitableInterface->Student:accept(AbstractVisitor: GradesVisitor)
 Student->GradesVisitor:visit(Visitable: Student)
-FinalGradesVisitor->Student:update_grade()
+GradesVisitor->Student:update_grade(grade: integer)
+Student->CommentsVisitor:visit(Visitable: Student)
+CommentsVisitor->Student:update_comment(comment: string)
 @enduml
 
