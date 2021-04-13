@@ -1,0 +1,52 @@
+@startuml
+
+package CourseManagementSystem {
+  class ChartDataGet {
+    input_data : [DataPoint]
+    formatted_data()
+  }
+
+  abstract class FilteringStrategy {
+    get_data(input_data : [DataPoint], options)
+  }
+
+  abstract class RegularSegregation {
+    get_data(input_data, options = {})
+  }
+
+  class DataPoint {
+    student : Student,
+    grade : integer,
+    outlier : boolean
+  }
+
+  class CompositeFilteringStrategy {
+    get_data(input_data : [DataPoint], options),
+    add_strategy(strategy : FilteringStrategy)
+  }
+
+  class GenderFilteringStrategy {
+    get_data(input_data : [DataPoint], options)
+  }
+
+  class AgeFilteringStrategy {
+    get_data(input_data : [DataPoint], options)
+  }
+
+  class DistinguishedGradeSegregation {
+    get_data(input_data : [DataPoint], options)
+  }
+
+  ChartDataGet o-- FilteringStrategy
+  FilteringStrategy <.. GenderFilteringStrategy : "implements"
+  FilteringStrategy <.. AgeFilteringStrategy : "implements"
+  FilteringStrategy <.. RegularSegregation : "implements"
+  RegularSegregation <.. DistinguishedGradeSegregation : "implements"
+  DistinguishedGradeSegregation o-- RegularSegregation
+  CompositeFilteringStrategy -- FilteringStrategy
+  CompositeFilteringStrategy o-- FilteringStrategy
+  CompositeFilteringStrategy -- DataPoint
+}
+
+@enduml
+
