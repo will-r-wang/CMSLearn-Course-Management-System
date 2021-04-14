@@ -1,15 +1,19 @@
 class AnnouncementManager < ApplicationRecord
+  belongs_to :course
+  has_many :subscriptions, dependent: :delete_all
+  has_many :announcements
+
   def subscribe(student_id)
     Subscription.new(student_id: student_id, announcement_manager_id: @id)
   end
 
-  def notify
-    Subscription.where(announcement_manager_id: @id).each do |subscription|
-      WebNotification.new(student_id: subscription.student_id, course_id: subscription.course_id)
+  def notify(announcement)
+    subscriptions.each do |subscription|
+      UserMailer.announcement_notification_email(current_user, announcement)
     end
   end
 
   def unsubscribe(student_id)
-    Subscription.destroy(student_id: student_id, announcement_manager_id: @id)
+    subscriptions.find_by(student_id: student_id).destroy
   end
 end

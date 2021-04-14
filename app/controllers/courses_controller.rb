@@ -7,7 +7,7 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.new(course_params)
+    @course = Course.new(course_params.except(:announcement_content))
     @course.teacher = current_user
     @course.semester = current_semester
 
@@ -25,6 +25,14 @@ class CoursesController < ApplicationController
       course_registration = CourseRegistration.find_by!(status: "approved", user: current_user, course: @course)
       @grade = course_registration.grade
     end
+  end
+
+  def update_grade
+    course_registration = CourseRegistration.find_by!(status: "approved", user: Student.find_by!(username: params[:username]))
+    course_registration.update!(grade: params[:updated_grade])
+
+    flash[:notice] = "Student with username=#{params[:username]} grade succesfully updated"
+    redirect_back fallback_location: root_path
   end
 
   def register
@@ -45,6 +53,17 @@ class CoursesController < ApplicationController
       flash[:notice] = "Course #{@course.course_code} successfully withdrawn."
       redirect_to root_path
     end
+  end
+
+  def create_announcement
+    course = Course.find(session[:course_id])
+    announcement_manager = AnnouncementManager.find(session[:course_id])
+    announcement = announcement_manager.announcements.build(announcement_content: params[:announcement_content])
+    announcement.save
+    announcement = Announcement.last
+    course.announcement_manager.notify(announcement)
+    flash[:notice] = "Announcement successfully created."
+    redirect_to course_path(course)
   end
 
   def update
@@ -73,7 +92,7 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:course_name, :course_code, :capacity)
+    params.require(:course).permit(:course_name, :course_code, :capacity, :announcement_content)
   end
 
   def create_course_registration

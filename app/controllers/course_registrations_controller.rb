@@ -8,9 +8,15 @@ class CourseRegistrationsController < ApplicationController
 
     raise "Invalid user_type" unless user.kind_of?(Student)
 
-    ActiveRecord::Base.transaction do
-      course_registration.update!(status: "approved")
-      flash[:notice] = "Approved #{user.full_name}'s request to register in course #{course.course_name}"
+    if Time.now > current_semester.registration_deadline
+      flash[:error] = "Passed registration deadline"
+    elsif course.enrolled_students + 1 > course.capacity
+      flash[:error] = "Maximum course capacity reached."
+    else
+      ActiveRecord::Base.transaction do
+        course_registration.update!(status: "approved")
+        flash[:notice] = "Approved #{user.full_name}'s request to register in course #{course.course_name}"
+      end
     end
 
     redirect_to root_path

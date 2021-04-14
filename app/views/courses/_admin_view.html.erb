@@ -154,6 +154,14 @@
     <% else %>
       <p>There are no students registered for this course.</p>
     <% end %>
+    <h5>Update Student Grade</h5>
+    <%= form_tag(update_grade_course_path, method: :post, class:"form-inline") do %>
+      <div style="display:block">
+        <%= text_field_tag(:username, params[:username], placeholder: "Student username", class: "form-control") %>
+        <%= text_field_tag(:updated_grade, params[:updated_grade], placeholder: "Updated Grade", class: "form-control") %>
+        <%= submit_tag("Update", :class => 'btn btn-primary', :style => "margin-left: 8px;") %>
+      </div>
+    <% end %>
   </div>
 </div>
 <br><br>

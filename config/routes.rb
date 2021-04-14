@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :announcements, except: [:index, :show]
+
   resources :deliverables, except: [:index]
   resources :assignments, controller: 'deliverables', type: 'Assignment'
   resources :quizzes, controller: 'deliverables', type: 'Quiz'
@@ -23,6 +25,8 @@ Rails.application.routes.draw do
   resources :courses do
     post 'register', on: :member
     post 'withdraw', on: :member
+    post 'create_announcement', on: :member
+    post 'update_grade', on: :member
   end
 
   resources :users

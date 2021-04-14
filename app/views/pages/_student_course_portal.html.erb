@@ -19,7 +19,7 @@
               <td><%= course.course_code %></td>
               <td><%= course.teacher.full_name %></td>
               <td><%= course.semester.name %></td>
-              <td><%= button_to "View", course_path(course), :method => :get, class: 'btn btn-primary', form: {style: 'display:inline-block;'} %></td>
+              <td><%= button_to "View", course_path(course), :method => :get, class: 'btn btn-primary', form: {style: 'display:inline-block;'} %> | <%= button_to "Withdraw", course_registration_path(course), :method => :delete, class: 'btn btn-danger', form: {style: 'display:inline-block;'} %></td>
             </tr>
           <% end %>
         </tbody>

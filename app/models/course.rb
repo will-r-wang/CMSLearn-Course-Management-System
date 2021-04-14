@@ -6,6 +6,8 @@ class Course < ApplicationRecord
   has_many :deliverables
   has_many :resources
   has_many :announcements
+  has_one :announcement_manager
+  after_create :setup_announcement_manager
 
   def enrolled_students
     CourseRegistration.where(course_id: id, status: "approved").count
@@ -17,5 +19,10 @@ class Course < ApplicationRecord
 
   def registered?(user_id)
     !CourseRegistration.where(course_id: id, user_id: user_id, status: "approved").empty?
+  end
+
+  def setup_announcement_manager
+    create_announcement_manager
+    self.announcement_manager_id = AnnouncementManager.last.id
   end
 end

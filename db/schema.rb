@@ -10,11 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_170340) do
+ActiveRecord::Schema.define(version: 2021_04_15_024335) do
 
   create_table "announcement_managers", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "course_id"
+    t.index ["course_id"], name: "index_announcement_managers_on_course_id"
   end
 
   create_table "announcements", force: :cascade do |t|
@@ -46,6 +48,8 @@ ActiveRecord::Schema.define(version: 2021_04_13_170340) do
     t.integer "semester_id"
     t.integer "teacher_id"
     t.integer "department_id"
+    t.integer "announcement_manager_id"
+    t.index ["announcement_manager_id"], name: "index_courses_on_announcement_manager_id"
     t.index ["department_id"], name: "index_courses_on_department_id"
     t.index ["semester_id"], name: "index_courses_on_semester_id"
     t.index ["teacher_id"], name: "index_courses_on_teacher_id"
