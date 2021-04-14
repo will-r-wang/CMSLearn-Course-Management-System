@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_11_135155) do
+ActiveRecord::Schema.define(version: 2021_04_13_170340) do
 
   create_table "announcement_managers", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2021_04_11_135155) do
     t.integer "course_id"
     t.integer "user_id"
     t.string "message"
+    t.string "type"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
