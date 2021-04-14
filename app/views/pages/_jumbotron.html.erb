@@ -2,9 +2,5 @@
   <h1 class>CMSLearn Dashboard</h1>
   <p class="lead">Welcome <%= user.full_name %></p>
   <hr class="my-4">
-  <% if semester %>
-    <p><b><%= semester.name %> semester:</b><br>End date: <%= semester.end_date.strftime '%Y-%m-%d' %><br>Days Remaining: <%= (semester.end_date - Date.today).to_i %> days.</p>
-  <% end %>
+  <p><b><%= semester.name %> semester:</b><br>End date: <%= semester.end_date.strftime '%Y-%m-%d' %><br>Days Remaining: <%= (semester.end_date - Date.today).to_i %> days.</p>
 </div>
-
-

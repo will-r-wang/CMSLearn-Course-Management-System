@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def current_semester
-    Semester.where("start_date <= ?", Time.now).where("end_date >= ?", Time.now).first
+    Semester.where("start_date <= ?", Time.now).where("end_date >= ?", Time.now).first || NullSemester.new
   end
 
   def logged_in?
