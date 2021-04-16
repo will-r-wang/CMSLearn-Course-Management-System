@@ -1,3 +1,0 @@
-class Url < Resource
-
-end

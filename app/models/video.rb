@@ -1,3 +1,0 @@
-class Video < Resource
-
-end

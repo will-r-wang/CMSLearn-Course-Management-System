@@ -1,3 +1,0 @@
-class BackgroundSurvey < Deliverable
-end
-

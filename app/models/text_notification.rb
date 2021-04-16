@@ -1,2 +1,0 @@
-class TextNotification < Notification
-end

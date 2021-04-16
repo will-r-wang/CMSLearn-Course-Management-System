@@ -1,2 +1,0 @@
-class Tutorial < Deliverable
-end

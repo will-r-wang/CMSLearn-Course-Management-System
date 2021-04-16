@@ -1,3 +1,0 @@
-class Resource < Activity
-
-end
